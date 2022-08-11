@@ -1,75 +1,107 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
+
 import WeatherService from '@/services/WeatherService'
-
-const ConfigurationStore = {
-  defaultUnits: 'metric',
-  defaultLocation: 'Košice'
-}
+import { useConfiguration  } from '@/stores/Configuration';
 
 
-export const useWeatherStore = defineStore('Weather Store', {
-  state: () => ({
-    locationData: { location: '', country: '', lat: 0, lon: 0 },
-    weatherData: {},
-    forecastData: [{}]
-  }),
-  getters: {},
-  actions: {
-    async fetchWeatherAPIData(location: string = ConfigurationStore.defaultLocation) {
-      try {
+export const useWeatherStore = defineStore('weatherStore', () => {
+  const ConfigurationStore = useConfiguration()
 
-        // Get coordinates for selected location (by name query)
-        const locationRaw = (await WeatherService.getGeocoding(location)).data[0]
+  /* STORE STATE */
+  let locationData = ref<location>({} as location)
+  let weatherData = ref<weather>({} as weather)
+  let forecastData = ref<forecast[]>([] as forecast[])
+  
+  
+  /* STORE ACTIONS */
+  async function fetchWeatherAPIData (location: string = ConfigurationStore.defaultLocation) {
+    try {
 
-        this.locationData = {
-          location: locationRaw.name,
-          country: locationRaw.country,
-          lat: locationRaw.lat,
-          lon: locationRaw.lon,
-        }
-        
-        
-        // Get current weather data for selected location
-        const { lat, lon } = this.locationData
-        const units: string = ConfigurationStore.defaultUnits
-        const dataRaw = (await WeatherService.getAllWeatherData(lat, lon, units)).data
-        
-        const daytime = dataRaw.current.sunset - dataRaw.current.sunrise
-        const timezoneShift = dataRaw.timezone_offset       // 7200 (2h)
+      // Get coordinates for selected location (by name query)
+      const locationRaw = (await WeatherService.getGeocoding(location)).data[0]
 
-        this.weatherData = {
-          weather: dataRaw.current.weather.main,            // 'Rain'
-          weatherIcon: dataRaw.current.weather.icon,        // '10d'
-          temp: dataRaw.current.temp,                       // 20.61
-          tempMin: dataRaw.daily[0].temp.min,               // 21.09
-          tempMax: dataRaw.daily[0].temp.max,               // 22.4
-          humidity: dataRaw.current.humidity,               // 52
-          windSpeed: dataRaw.current.wind_speed,            // 6.69
-          sunrise: dataRaw.current.sunrise + timezoneShift, // 1660188130 (05:22 GMT0)
-          sunset: dataRaw.current.sunset + timezoneShift,   // 1660240707 (19:58 GMT0)
-          daytime                                           // 52577 (14:36)
-        }
-
-
-        // Get 3 day forecast data for selected location
-        const forecastRaw = (await WeatherService.getForecast(lat, lon, units)).data
-        this.forecastData.length = 0
-
-        for (let i = 1; i < 4; i++) {
-          this.forecastData.push({
-            weatherIcon: dataRaw.daily[i].weather.icon,
-            day: dataRaw.daily[i].dt,
-            tempMin: dataRaw.daily[i].temp.min,
-            tempMax: dataRaw.daily[i].temp.max,
-          })
-        }
-
-
-      // Error handling
-      } catch (error) {
-        console.error(error)
-        throw new Error('A communication error with OpenWeatherAPI has occurred');
+      locationData.value = {
+        location: locationRaw.name,
+        country: locationRaw.country,
+        lat: locationRaw.lat,
+        lon: locationRaw.lon,
       }
+      
+      
+      // Get current weather data for selected location
+      const { lat, lon } = locationData.value
+      const units: string = ConfigurationStore.defaultUnits
+      const weatherRaw = (await WeatherService.getAllWeatherData(lat, lon, units)).data
+      
+      const daytime: number = weatherRaw.current.sunset - weatherRaw.current.sunrise
+      const timezoneShift: number = weatherRaw.timezone_offset
+
+      weatherData.value = {
+        weather: weatherRaw.current.weather[0].main,
+        weatherIcon: weatherRaw.current.weather[0].icon,
+        temp: weatherRaw.current.temp,
+        tempMin: weatherRaw.daily[0].temp.min,
+        tempMax: weatherRaw.daily[0].temp.max,
+        humidity: weatherRaw.current.humidity,
+        windSpeed: weatherRaw.current.wind_speed,
+        sunrise: weatherRaw.current.sunrise + timezoneShift,
+        sunset: weatherRaw.current.sunset + timezoneShift,
+        daytime
+      }
+
+      
+      // Get forecast data for next 3 days
+      forecastData.value.length = 0
+
+      for (let i = 1; i < 4; i++) {
+        forecastData.value.push({
+          weatherIcon: weatherRaw.daily[i].weather[0].icon,
+          day: weatherRaw.daily[i].dt + timezoneShift,
+          tempMin: weatherRaw.daily[i].temp.min,
+          tempMax: weatherRaw.daily[i].temp.max,
+        })
+      }
+
+
+    // Error handling
+    } catch (error) {
+      console.error(error)
+      throw new Error('A communication error with OpenWeatherAPI has occurred')
     }
   }
+
+
+  /* EXTRACTED DATA */
+  return { locationData, weatherData, forecastData, fetchWeatherAPIData }
 })
+
+
+
+/* TYPESCRIPT INTERFACES */
+interface location {
+  location: string,     // Example value: 'Košice'
+  country: string,      // Example value: 'SK'
+  lat: number,          // Example value: 48.7172
+  lon: number           // Example value: 21.2497
+}
+
+interface weather {
+  weather: string,      // Example value: 'Rain'
+  weatherIcon: string,  // Example value: '10d'
+  temp: number,         // Example value: 20.61
+  tempMin: number,      // Example value: 21.09
+  tempMax: number,      // Example value: 22.4
+  humidity: number,     // Example value: 52
+  windSpeed: number,    // Example value: 6.69
+  sunrise: number,      // Example value: 1660188130 (05:22 GMT0)
+  sunset: number,       // Example value: 1660240707 (19:58 GMT0)
+  daytime: number       // Example value: 52577 (14:36)
+}
+
+interface forecast {
+  weatherIcon: string,  // Example value: '10d'
+  day: number,          // Example value: 1660384800 (Sat Aug 13)
+  tempMin: number,      // Example value: 16.76,
+  tempMax: number,      // Example value: 26.2,
+}
