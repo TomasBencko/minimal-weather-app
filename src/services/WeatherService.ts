@@ -14,9 +14,15 @@ const openWeatherAPI = axios.create({
 
 // API calls
 export default {
-  getGeocoding(query: string, limit: number = 5) {
-    return openWeatherAPI.get(`geo/1.0/direct?q=${query}&limit=${limit}&appid=${apiKey}`)
+  getGeocoding(q: string, limit: number = 1) {
+    return openWeatherAPI.get(`geo/1.0/direct?q=${q}&limit=${limit}&appid=${apiKey}`)
   },
+  getAllWeatherData(lat: number, lon: number, units: string = 'metric') {
+    return openWeatherAPI.get(`data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=${units}&appid=${apiKey}`)
+  },
+
+
+  // No longer in use (free plan)
   getWeather(lat: number, lon: number, units: string = 'metric') {
     return openWeatherAPI.get(`data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`)
   },

@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import ContentPanel from "./components/ContentPanel.vue"
+import ContentPanel from "@/components/ContentPanel.vue"
 
 
 

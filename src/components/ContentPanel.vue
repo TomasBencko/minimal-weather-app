@@ -14,15 +14,14 @@
 
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
-import { useWeatherStore } from '../stores/WeatherStore'
+import { useWeatherStore } from '@/stores/WeatherStore'
 
 const weatherStore = useWeatherStore()
-const locationDefault: string = 'Košice'
 
 let communicationProblems = ref<boolean>(false)
 
 try {
-  await weatherStore.fetchWeatherAPIData(locationDefault)
+  await weatherStore.fetchWeatherAPIData()
   
 } catch (error) {
   console.log(error)
