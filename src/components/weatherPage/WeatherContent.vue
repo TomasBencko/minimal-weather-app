@@ -2,7 +2,7 @@
   <div class="WeatherContent">
     <component class="InfoTile"
       v-for="(tile, index) in tilesConfiguration" :key="index"
-      :is="tileComponents[tile.type]" :data="tile.data"
+      :is="tileComponents[tile.type] || TileOther" :tileData="tile"
     />
   </div>
 </template>
@@ -20,8 +20,7 @@
   const tileComponents: componentList = {
     weather: TileWeather,
     temperature: TileTemperature,
-    highAndLow: TileHighAndLow,
-    other: TileOther,
+    highAndLow: TileHighAndLow
   }
 
   // Load configuration for tiles to be rendered

@@ -25,6 +25,7 @@ export interface weather {
   tempMin: number,      // Example value: 21.09
   tempMax: number,      // Example value: 22.4
   humidity: number,     // Example value: 52
+  pressure: number,     // Example value: 1015
   windSpeed: number,    // Example value: 6.69
   sunrise: number,      // Example value: 1660188130 (05:22 GMT0)
   sunset: number,       // Example value: 1660240707 (19:58 GMT0)

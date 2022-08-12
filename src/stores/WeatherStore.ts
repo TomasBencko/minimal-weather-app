@@ -46,6 +46,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
         tempMin: weatherRaw.daily[0].temp.min,
         tempMax: weatherRaw.daily[0].temp.max,
         humidity: weatherRaw.current.humidity,
+        pressure: weatherRaw.current.pressure,
         windSpeed: weatherRaw.current.wind_speed,
         sunrise: weatherRaw.current.sunrise + timezoneShift,
         sunset: weatherRaw.current.sunset + timezoneShift,

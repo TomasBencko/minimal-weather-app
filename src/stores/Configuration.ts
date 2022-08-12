@@ -5,15 +5,15 @@ export const useConfiguration = defineStore('configuration', () => {
   const defaultLocation = 'Košice'
 
   const tilesConfiguration = [
-    { type: 'weather', data: { desc: 'Sunny', icon: 'sunny' } },
-    { type: 'temperature', data: { value: 33 } },
-    { type: 'highAndLow', data: { high: 35, low: 27 } },
-    { type: 'other', data: { desc: 'Humidity', icon: 'humidity', value: 49 } },
-    { type: 'other', data: { desc: 'Pressure', icon: 'humidity', value: 1007 } },
-    { type: 'other', data: { desc: 'Wind', icon: 'humidity', value: 23 } },
-    { type: 'other', data: { desc: 'Sunrise', icon: 'humidity', value: 1660188130 } },
-    { type: 'other', data: { desc: 'Sunset', icon: 'humidity', value: 1660240707 } },
-    { type: 'other', data: { desc: 'Daytime', icon: 'humidity', value: 52577 } }
+    { type: 'weather' },
+    { type: 'temperature' },
+    { type: 'highAndLow' },
+    { type: 'humidity', text: 'Humidity', icon: 'humidity' },
+    { type: 'pressure', text: 'Pressure', icon: 'humidity' },
+    { type: 'windSpeed', text: 'Wind', icon: 'humidity' },
+    { type: 'sunrise', text: 'Sunrise', icon: 'humidity' },
+    { type: 'sunset', text: 'Sunset', icon: 'humidity' },
+    { type: 'daytime', text: 'Daytime', icon: 'humidity' }
   ]
   
   return { defaultUnits, defaultLocation, tilesConfiguration }

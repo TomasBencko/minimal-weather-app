@@ -1,6 +1,6 @@
 <template>
   <div class="WeatherHeader">
-    <div class="date">Wednesday, 08 Oct 2020 | 4:30 PM</div>
+    <div class="date">{{ date }}</div>
     <div class="location">
       <RouterLink to="/search">{{ location }}, {{ country }}</RouterLink>
       <!--  TODO  Location icon -->
@@ -10,20 +10,26 @@
 
 <script setup lang="ts">
   import { RouterLink } from 'vue-router'
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
   import type { dictionary } from '@/common/types'
+  import moment from 'moment'
 
 
-  const weatherStore = useWeatherStore()
+  const WeatherStore = useWeatherStore()
 
-  const location = computed(() => weatherStore.locationData.location)
+  const location = computed(() => WeatherStore.locationData.location)
 
   const country = computed(() => {
-    const countryCode: string = weatherStore.locationData.country
+    const countryCode: string = WeatherStore.locationData.country
     const codeDictionary: dictionary = { SK: 'Slovakia', CZ: 'Czechia' }
     return codeDictionary[countryCode] || countryCode
   })
+
+  // Show date and time and keep it current
+  const dateFormat: string = 'dddd, DD MMM YYYY [|] h:mm A'
+  let date = ref<string>(moment().format(dateFormat))
+  setInterval(() => date.value = moment().format(dateFormat), 1000)
 
 </script>
 

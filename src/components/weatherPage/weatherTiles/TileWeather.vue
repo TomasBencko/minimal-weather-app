@@ -1,22 +1,16 @@
 <template>
   <div class="TileWeather">
-    {{ data.desc }}
+    <!--  TODO  Icon -->
+    {{ weather }}
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps({
-    data: { type: Object, required: true }
-  })
+  import { useWeatherStore } from '@/stores/WeatherStore'
 
-
-  // const props = defineProps<{
-  //   data: dataObject
-  // }>()
-  // interface dataObject {
-  //   desc: string,
-  //   icon: string
-  // }
+  const WeatherStore = useWeatherStore()
+  const weather: string = WeatherStore.weatherData.weather
+  const weatherIcon: string = WeatherStore.weatherData.weatherIcon
   
 </script>
 

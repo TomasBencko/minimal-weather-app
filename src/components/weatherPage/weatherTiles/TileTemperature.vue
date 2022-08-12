@@ -1,13 +1,14 @@
 <template>
   <div class="TileTemperature">
-    {{ data.value }}°C
+    {{ temp }}°C
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps({
-    data: { type: Object, required: true }
-  })
+  import { useWeatherStore } from '@/stores/WeatherStore'
+
+  const WeatherStore = useWeatherStore()
+  const temp: number = WeatherStore.weatherData.temp
 
 </script>
 

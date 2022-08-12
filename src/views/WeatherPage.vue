@@ -15,18 +15,18 @@
 
 
   // Get weather data from OpenWeather API
-  const weatherStore = useWeatherStore()
+  const WeatherStore = useWeatherStore()
   let communicationProblems = ref<boolean>(false)
 
   try {
-    await weatherStore.fetchWeatherAPIData()
+    await WeatherStore.fetchWeatherAPIData()
     
   } catch (error) {
     console.log(error)
     communicationProblems.value = true
   }
 
-  console.log('CARRY ON');
+  console.log('CARRY ON')
 
 </script>
 
