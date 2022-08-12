@@ -11,6 +11,7 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router'
   import { computed } from 'vue'
+  import type { dictionary } from '@/common/types'
 
   const props = defineProps({
     locationData: { type: Object, required: true }
@@ -24,10 +25,6 @@
     const listOfCodes: dictionary = { SK: 'Slovakia', CZ: 'Czechia' }
     return listOfCodes[countryCode] || countryCode
   })
-
-  interface dictionary {
-    [key: string]: string
-  }
 
 </script>
 
