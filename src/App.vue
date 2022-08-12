@@ -1,5 +1,5 @@
 <template>
-  HELLO WORLD
+  <!-- <img class="bg-cover" src="@/assets/svg/bg-cover.svg" /> -->
   <Suspense>
     <ContentPanel />
 
@@ -16,5 +16,20 @@ import ContentPanel from "@/components/ContentPanel.vue"
 
 </script>
 
-<style scoped>
+<style>
+
+#app {
+  background-image: url(./assets/svg/bg-cover.svg);
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  background-size: contain;
+}
+
+@media (min-width: 1024px) {
+  #app {
+    background-size: cover;
+  }
+}
+
 </style>
