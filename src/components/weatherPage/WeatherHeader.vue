@@ -33,40 +33,41 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 .WeatherHeader {
   display: flex;
   justify-content: space-between;
   /* margin: -20px -20px 0; */
-}
 
-.WeatherHeader div {
-  padding: 15px;
-}
+  div {
+    padding: 15px;
+  }
 
-.date {
-  /* flex-grow: 1;
-  text-align: center; */
+  .date {
+    /* flex-grow: 1;
+    text-align: center; */
 
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-  color: #999999;
-}
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #999999;
+  }
 
-.location {
-  border-bottom-left-radius: 24px;
-  background: rgba(13, 159, 234, 0.08);
-}
+  .location {
+    border-bottom-left-radius: 24px;
+    background: rgba(13, 159, 234, 0.08);
 
-.location a {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #0DA0EA;
-  
-  text-decoration: none;
+    a {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      color: #0DA0EA;
+      
+      text-decoration: none;
+    }
+  }
 }
 
 </style>
