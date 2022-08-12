@@ -11,19 +11,18 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router'
   import { computed } from 'vue'
+  import { useWeatherStore } from '@/stores/WeatherStore'
   import type { dictionary } from '@/common/types'
 
-  const props = defineProps({
-    locationData: { type: Object, required: true }
-  })
 
-  const location = computed(() => {
-    return props.locationData.location
-  })
+  const weatherStore = useWeatherStore()
+
+  const location = computed(() => weatherStore.locationData.location)
+
   const country = computed(() => {
-    const countryCode: string = props.locationData.country
-    const listOfCodes: dictionary = { SK: 'Slovakia', CZ: 'Czechia' }
-    return listOfCodes[countryCode] || countryCode
+    const countryCode: string = weatherStore.locationData.country
+    const codeDictionary: dictionary = { SK: 'Slovakia', CZ: 'Czechia' }
+    return codeDictionary[countryCode] || countryCode
   })
 
 </script>

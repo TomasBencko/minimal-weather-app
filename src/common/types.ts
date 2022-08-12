@@ -4,6 +4,11 @@ export interface dictionary {
   [key: string]: string
 }
 
+// Used in WeatherContent.vue
+export interface componentList {
+  [key: string]: object
+}
+
 
 // Used in WeatherStore.ts
 export interface location {

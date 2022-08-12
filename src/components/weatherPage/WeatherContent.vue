@@ -2,16 +2,31 @@
   <div class="WeatherContent">
     <component class="InfoTile"
       v-for="(tile, index) in tilesConfiguration" :key="index"
-      :is="tile.component" :data="tile.data"
+      :is="tileComponents[tile.type]" :data="tile.data"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+  import { useConfiguration } from '@/stores/Configuration'
+  import type { componentList } from '@/common/types'
 
-  defineProps({
-    tilesConfiguration: { type: Object, required: true }
-  })
+  // Import components that will be used here
+  import TileWeather from '@/components/weatherPage/weatherTiles/TileWeather.vue'
+  import TileTemperature from '@/components/weatherPage/weatherTiles/TileTemperature.vue'
+  import TileHighAndLow from '@/components/weatherPage/weatherTiles/TileHighAndLow.vue'
+  import TileOther from '@/components/weatherPage/weatherTiles/TileOther.vue'
+
+  const tileComponents: componentList = {
+    weather: TileWeather,
+    temperature: TileTemperature,
+    highAndLow: TileHighAndLow,
+    other: TileOther,
+  }
+
+  // Load configuration for tiles to be rendered
+  const Configuration = useConfiguration()
+  const tilesConfiguration = Configuration.tilesConfiguration
 
 </script>
 

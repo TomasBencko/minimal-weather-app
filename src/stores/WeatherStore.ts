@@ -8,8 +8,8 @@ import type { location, weather, forecast } from '@/common/types'
 
 
 export const useWeatherStore = defineStore('weatherStore', () => {
-  const ConfigurationStore = useConfiguration()
-  
+  const Configuration = useConfiguration()
+
   /* STORE STATE */
   let locationData = ref<location>({} as location)
   let weatherData = ref<weather>({} as weather)
@@ -17,7 +17,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
   
   
   /* STORE ACTIONS */
-  async function fetchWeatherAPIData (location: string = ConfigurationStore.defaultLocation) {
+  async function fetchWeatherAPIData (location: string = Configuration.defaultLocation) {
     try {
 
       // Get coordinates for selected location (by name query)
@@ -33,7 +33,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
       
       // Get current weather data for selected location
       const { lat, lon } = locationData.value
-      const units: string = ConfigurationStore.defaultUnits
+      const units: string = Configuration.defaultUnits
       const weatherRaw = (await WeatherService.getAllWeatherData(lat, lon, units)).data
       
       const daytime: number = weatherRaw.current.sunset - weatherRaw.current.sunrise
