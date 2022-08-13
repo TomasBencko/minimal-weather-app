@@ -1,15 +1,15 @@
 <template>
   <div class="WeatherContent">
     <component class="InfoTile"
-      v-for="(tile, index) in tilesConfiguration" :key="index"
-      :is="tileComponents[tile.type] || TileOther" :tileData="tile"
+      v-for="(tileConfig, index) in tilesConfiguration" :key="index"
+      :is="componentList[tileConfig.type] || TileOther" :tileConfig="tileConfig"
     />
   </div>
 </template>
 
 <script setup lang="ts">
   import { useConfiguration } from '@/stores/Configuration'
-  import type { componentList } from '@/common/types'
+  import type { listOfComponents } from '@/common/types'
 
   // Import components that will be used here
   import TileWeather from '@/components/weatherPage/weatherTiles/TileWeather.vue'
@@ -17,7 +17,7 @@
   import TileHighAndLow from '@/components/weatherPage/weatherTiles/TileHighAndLow.vue'
   import TileOther from '@/components/weatherPage/weatherTiles/TileOther.vue'
 
-  const tileComponents: componentList = {
+  const componentList: listOfComponents = {
     weather: TileWeather,
     temperature: TileTemperature,
     highAndLow: TileHighAndLow

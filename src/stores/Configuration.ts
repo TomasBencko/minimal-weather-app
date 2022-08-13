@@ -1,31 +1,24 @@
 import { defineStore } from 'pinia'
 
 export const useConfiguration = defineStore('configuration', () => {
+
+  // Bypass API calls and return placehodler data if true
+  const usePlaceholderData = true
+
   const defaultUnits = 'metric'
   const defaultLocation = 'Košice'
-
-  // const tilesConfiguration = [ 'weather', 'temperature', 'highAndLow', 'humidity', 'pressure', 'windSpeed', 'sunrise', 'sunset', 'daytime' ]
 
   const tilesConfiguration = [
     { type: 'weather' },
     { type: 'temperature' },
     { type: 'highAndLow' },
-    { type: 'humidity', text: 'Humidity', icon: '027-humidity' },
-    { type: 'pressure', text: 'Pressure', icon: '050-barometer' },
-    { type: 'windSpeed', text: 'Wind', icon: '001-wind' },
-    { type: 'sunrise', text: 'Sunrise', icon: '008-sunrise' },
-    { type: 'sunset', text: 'Sunset', icon: '007-sunset' },
-    { type: 'daytime', text: 'Daytime', icon: 'sand-clock' }
+    { type: 'humidity', label: 'Humidity' },
+    { type: 'pressure', label: 'Pressure' },
+    { type: 'wind', label: 'Wind' },
+    { type: 'sunrise', label: 'Sunrise' },
+    { type: 'sunset', label: 'Sunset' },
+    { type: 'daytime', label: 'Daytime' }
   ]
   
-  return { defaultUnits, defaultLocation, tilesConfiguration }
+  return { defaultUnits, defaultLocation, tilesConfiguration, usePlaceholderData }
 })
-
-
-//  TODO  
-/*
-  Rename windSpeed to wind
-  Remove icon from config
-  Rename text to label
-  Use switch statement for value formatting only in TileOther
-*/

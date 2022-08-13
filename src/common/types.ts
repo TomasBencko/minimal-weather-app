@@ -7,8 +7,13 @@ export interface dictionary {
 }
 
 // Used in WeatherContent.vue
-export interface componentList {
-  [key: string]: Component         // Example: weather: TileWeather,
+export interface listOfComponents {
+  [key: string]: Component      // Example: weather: TileWeather,
+}
+
+// Used in TileOther.vue
+export interface listOfSVGIcons {
+  [key: string]: Object         // Example: humidity: HumidityIcon,
 }
 
 
@@ -28,7 +33,7 @@ export interface weather {
   tempMax: number,              // Example value: 22.4
   humidity: number,             // Example value: 52
   pressure: number,             // Example value: 1015
-  windSpeed: number,            // Example value: 6.69
+  wind: number,                 // Example value: 6.69
   sunrise: number,              // Example value: 1660188130 (05:22 GMT0)
   sunset: number,               // Example value: 1660240707 (19:58 GMT0)
   daytime: number               // Example value: 52577 (14:36)

@@ -21,7 +21,10 @@ export const useWeatherStore = defineStore('weatherStore', () => {
     try {
 
       // Get coordinates for selected location (by name query)
-      const locationRaw = (await WeatherService.getGeocoding(location)).data[0]
+      const locationRaw = (await WeatherService.getGeocoding({
+        q: location,
+        usePlaceholderData: Configuration.usePlaceholderData
+      })).data[0]
 
       locationData.value = {
         location: locationRaw.name,
@@ -32,9 +35,12 @@ export const useWeatherStore = defineStore('weatherStore', () => {
       
       
       // Get current weather data for selected location
-      const { lat, lon } = locationData.value
-      const units: string = Configuration.defaultUnits
-      const weatherRaw = (await WeatherService.getAllWeatherData(lat, lon, units)).data
+      const weatherRaw = (await WeatherService.getAllWeatherData({
+        lat: locationData.value.lat,
+        lon: locationData.value.lon,
+        units: Configuration.defaultUnits,
+        usePlaceholderData: Configuration.usePlaceholderData
+      })).data
       
       const daytime: number = weatherRaw.current.sunset - weatherRaw.current.sunrise
       const timezoneShift: number = weatherRaw.timezone_offset
@@ -47,7 +53,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
         tempMax: weatherRaw.daily[0].temp.max,
         humidity: weatherRaw.current.humidity,
         pressure: weatherRaw.current.pressure,
-        windSpeed: weatherRaw.current.wind_speed,
+        wind: weatherRaw.current.wind_speed,
         sunrise: weatherRaw.current.sunrise + timezoneShift,
         sunset: weatherRaw.current.sunset + timezoneShift,
         daytime

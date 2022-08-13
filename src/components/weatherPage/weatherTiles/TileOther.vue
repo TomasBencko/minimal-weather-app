@@ -1,16 +1,19 @@
 <template>
   <div class="TileOther">
-    <component :is="icon" class="icon" />
+    <component :is="iconList[tileConfig.type]" class="icon" />
     <p class="value">{{ valueFormated }}</p>
-    <p class="text">{{ text }}</p>
+    <p class="label">{{ tileConfig.label || 'Undefined' }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { useWeatherStore } from '@/stores/WeatherStore'
-  import type { Component } from 'vue'
   import moment from 'moment'
+  import type { listOfSVGIcons } from '@/common/types'
 
+  import { useWeatherStore } from '@/stores/WeatherStore'
+  const WeatherStore = useWeatherStore()
+
+  // Import components that will be used here
   import HumidityIcon from '@/assets/svg/027-humidity.svg'
   import PressureIcon from '@/assets/svg/050-barometer.svg'
   import WindIcon from '@/assets/svg/001-wind.svg'
@@ -18,43 +21,54 @@
   import SunsetIcon from '@/assets/svg/007-sunset.svg'
   import DaytimeIcon from '@/assets/svg/sand-clock.svg'
 
-  const props = defineProps({
-    tileData: { type: Object, required: true }
-  })
-
-  const WeatherStore = useWeatherStore()
-  type possibleKeys = 'humidity' | 'pressure' | 'windSpeed' | 'sunrise' | 'sunset' | 'daytime'
-  // const value: number = WeatherStore.weatherData[props.tileData.type as possibleKeys]
-  const tileType: string = props.tileData.type
-
-  let icon: Component | string,
-    valueFormated: number | string,
-    text: string
-
-  switch (tileType) {
-    case 'humidity':
-      valueFormated = `${WeatherStore.weatherData[tileType]}%`
-      icon = HumidityIcon; text = 'Humidity'; break;
-    case 'pressure':
-      valueFormated = `${WeatherStore.weatherData[tileType].toLocaleString('en-US')}mBar`
-      icon = PressureIcon; text = 'Pressure'; break;
-    case 'windSpeed':
-      valueFormated = `${Math.round(WeatherStore.weatherData[tileType])} km/h`
-      icon = WindIcon; text = 'Wind'; break;
-    case 'sunrise':
-      valueFormated = `${moment.utc(WeatherStore.weatherData[tileType] * 1000).format('h:mm A')}`
-      icon = SunriseIcon; text = 'Sunrise'; break;
-    case 'sunset':
-      valueFormated = `${moment.utc(WeatherStore.weatherData[tileType] * 1000).format('h:mm A')}`
-      icon = SunsetIcon; text = 'Sunset'; break;
-    case 'daytime':
-      valueFormated = `${moment.utc(WeatherStore.weatherData[tileType] * 1000).format('H[h] m[m]')}`
-      icon = DaytimeIcon; text = 'Daytime'; break;
-    default:
-      valueFormated = `N/A`; icon = HumidityIcon; text = 'Undefined'; break;
+  const iconList: listOfSVGIcons = {
+    humidity: HumidityIcon,
+    pressure: PressureIcon,
+    wind: WindIcon,
+    sunrise: SunriseIcon,
+    sunset: SunsetIcon,
+    daytime: DaytimeIcon
   }
 
 
+  // Prepare variables necessary to render given tile type
+  const props = defineProps({ tileConfig: { type: Object, required: true } })
+  type possibleKeys = 'humidity' | 'pressure' | 'wind' | 'sunrise' | 'sunset' | 'daytime'
+  const tileType: possibleKeys = props.tileConfig.type
+  const valueRaw: number = WeatherStore.weatherData[tileType]
+  let valueFormated: string
+
+  switch (tileType) {
+    case 'humidity': valueFormated = formatPercentages(valueRaw); break;
+    case 'pressure': valueFormated = formatPressure(valueRaw); break;
+    case 'wind': valueFormated = formatSpeed(valueRaw); break;
+    case 'sunrise': valueFormated = formatTime(valueRaw); break;
+    case 'sunset': valueFormated = formatTime(valueRaw); break;
+    case 'daytime': valueFormated = formatDuration(valueRaw); break;
+    default: valueFormated = `N/A`; break;
+  }
+
+
+  // Functions to format raw values
+  function formatPercentages(value: number): string {
+    return Math.round(value) + '%'
+  }
+
+  function formatPressure(value: number): string {
+    return value.toLocaleString('en-US') + 'mBar'
+  }
+
+  function formatSpeed(value: number): string {
+    return Math.round(value) + 'km/h'
+  }
+
+  function formatTime(value: number): string {
+    return moment.utc(value * 1000).format('h:mm A')
+  }
+
+  function formatDuration(value: number): string {
+    return moment.utc(value * 1000).format('H[h] m[m]')
+  }
 
 
 </script>
@@ -77,7 +91,7 @@
     color: #444444;
   }
 
-  .text {
+  .label {
     font-weight: 500;
     font-size: 8px;
     line-height: 10px;
