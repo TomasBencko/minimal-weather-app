@@ -1,12 +1,14 @@
 <template>
   <section class="WeatherPage">
-    <WeatherHeader />
-    <WeatherContent />
+    <WeatherHeader v-if="dataLoaded" />
+    <WeatherContent v-if="dataLoaded" />
+
+    <div class="loading" v-else="dataLoaded">Loading...</div>
   </section>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
   import { useConfiguration } from '@/stores/Configuration'
   const WeatherStore = useWeatherStore()
@@ -23,16 +25,20 @@
 
   // Get weather data from OpenWeather API
   let communicationProblems = ref<boolean>(false)
+  let dataLoaded = ref<boolean>(false)
 
-  try {
-    await WeatherStore.fetchWeatherAPIData()
-    
-  } catch (error) {
-    console.log(error)
-    communicationProblems.value = true
-  }
+  onMounted(async () => {
+    try {
+      await WeatherStore.fetchWeatherAPIData()
+      
+    } catch (error) {
+      console.log(error)
+      communicationProblems.value = true
+    }
 
-  console.log('DATA HAS BEEN LOADED')
+    dataLoaded.value = true
+    console.log('DATA HAS BEEN LOADED')
+  })
 
 </script>
 
@@ -46,6 +52,14 @@
 
   display: flex;
   flex-direction: column;
+
+  .loading {
+    flex-grow: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 </style>

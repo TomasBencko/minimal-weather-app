@@ -37,7 +37,7 @@
   flex-direction: column;
 
   // Transitions
-  transition: min-height .5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: min-height .4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .ContentPanel.expanded {
