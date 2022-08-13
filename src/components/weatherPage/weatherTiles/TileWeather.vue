@@ -2,7 +2,7 @@
   <div class="TileWeather">
     <!--  TODO  Icon -->
     <Sunny class="icon" />
-    {{ weather }}
+    <p>{{ weather }}</p>
   </div>
 </template>
 
@@ -22,6 +22,14 @@
 .icon {
   height: 30px;
   margin-bottom: 4px;
+}
+
+p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.05em;
+  color: #000000;
 }
 
 </style>
