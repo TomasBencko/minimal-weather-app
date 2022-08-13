@@ -1,24 +1,24 @@
 <template>
   <div class="TileHighAndLow">
-    <p>{{ tempMin }}°C<CurrentHigh class="icon arrow-up" /></p>
-    <p>{{ tempMax }}°C<CurrentLow class="icon" /></p>
+    <div>
+      <p>{{ tempMin }}°C<CurrentHigh class="icon arrow-up" /></p>
+      <p>{{ tempMax }}°C<CurrentLow class="icon" /></p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
+  const WeatherStore = useWeatherStore()
 
+  // Components
   import CurrentHigh from '@/assets/svg/current-high.svg'
   import CurrentLow from '@/assets/svg/current-low.svg'
 
-  const WeatherStore = useWeatherStore()
-  const tempMin = computed<number>(() => {
-    return Math.round(WeatherStore.weatherData.tempMin)
-  })
-  const tempMax = computed<number>(() => {
-    return Math.round(WeatherStore.weatherData.tempMax)
-  })
+
+  // Variables necessary to render the component
+  const tempMin: number = Math.round(WeatherStore.weatherData.tempMin)
+  const tempMax: number = Math.round(WeatherStore.weatherData.tempMax)
 
 </script>
 
@@ -26,24 +26,28 @@
 
 .TileHighAndLow {
 
-  p:first-child {
-    margin-bottom: 10px;
-  }
-  
-  p {
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 19px;
-    color: #666666;
+  div {
+    text-align: right;
 
-    .icon {
-      display: inline-block;
-      height: 8px;
-      margin-left: 2px;
+    p:first-child {
+      margin-bottom: 10px;
     }
+    
+    p {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 19px;
+      color: #666666;
 
-    .arrow-up {
-      top: -4px;
+      .icon {
+        display: inline-block;
+        height: 8px;
+        margin-left: 2px;
+      }
+
+      .arrow-up {
+        top: -4px;
+      }
     }
   }
 }

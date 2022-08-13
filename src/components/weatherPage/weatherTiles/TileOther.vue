@@ -9,11 +9,10 @@
 <script setup lang="ts">
   import moment from 'moment'
   import type { listOfSVGIcons } from '@/common/types'
-
   import { useWeatherStore } from '@/stores/WeatherStore'
   const WeatherStore = useWeatherStore()
 
-  // Import components that will be used here
+  // Components
   import HumidityIcon from '@/assets/svg/027-humidity.svg'
   import PressureIcon from '@/assets/svg/050-barometer.svg'
   import WindIcon from '@/assets/svg/001-wind.svg'
@@ -31,7 +30,7 @@
   }
 
 
-  // Prepare variables necessary to render given tile type
+  // Variables necessary to render the component
   const props = defineProps({ tileConfig: { type: Object, required: true } })
   type possibleKeys = 'humidity' | 'pressure' | 'wind' | 'sunrise' | 'sunset' | 'daytime'
   const tileType: possibleKeys = props.tileConfig.type
@@ -53,23 +52,18 @@
   function formatPercentages(value: number): string {
     return Math.round(value) + '%'
   }
-
   function formatPressure(value: number): string {
     return value.toLocaleString('en-US') + 'mBar'
   }
-
   function formatSpeed(value: number): string {
     return Math.round(value) + 'km/h'
   }
-
   function formatTime(value: number): string {
     return moment.utc(value * 1000).format('h:mm A')
   }
-
   function formatDuration(value: number): string {
     return moment.utc(value * 1000).format('H[h] m[m]')
   }
-
 
 </script>
 
@@ -86,7 +80,6 @@
   .value {
     font-weight: 500;
     font-size: 16px;
-    line-height: 19px;
     letter-spacing: -0.05em;
     color: #444444;
   }
@@ -94,7 +87,6 @@
   .label {
     font-weight: 500;
     font-size: 8px;
-    line-height: 10px;
     letter-spacing: 0.1em;
     color: #999999;
   }

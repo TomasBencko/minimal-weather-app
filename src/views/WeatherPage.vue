@@ -2,7 +2,6 @@
   <section class="WeatherPage">
     <WeatherHeader />
     <WeatherContent />
-    <!--  TODO  WeatherForecast -->
   </section>
 </template>
 
@@ -10,6 +9,7 @@
   import { ref } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
 
+  // Components
   import WeatherHeader from '@/components/weatherPage/WeatherHeader.vue'
   import WeatherContent from '@/components/weatherPage/WeatherContent.vue'
 
@@ -26,8 +26,20 @@
     communicationProblems.value = true
   }
 
-  console.log('CARRY ON')
+  console.log('DATA HAS BEEN LOADED')
 
 </script>
 
-<style scoped></style>
+
+<style lang="scss" scoped>
+
+.WeatherPage {
+  padding-bottom: 4px;
+  
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+</style>

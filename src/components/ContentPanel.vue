@@ -5,7 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+
+  // Components
+  import { RouterView } from 'vue-router'
 
 </script>
 
@@ -19,14 +21,16 @@ import { RouterView } from 'vue-router'
   /* padding: 20px; */
   background: #FFFFFF;
   box-shadow: 0px -16px 40px rgba(0, 0, 0, 0.2);
-  border-radius: 24px;
+  border-radius: 24px 24px 0 0;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 1024px) {
   #ContentPanel {
     position: absolute;
-    /*  TODO  */
   }
 }
 

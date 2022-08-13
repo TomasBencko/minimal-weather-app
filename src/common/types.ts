@@ -27,7 +27,6 @@ export interface location {
 
 export interface weather {
   weather: string,              // Example value: 'Rain'
-  weatherIcon: string,          // Example value: '10d'
   temp: number,                 // Example value: 20.61
   tempMin: number,              // Example value: 21.09
   tempMax: number,              // Example value: 22.4
@@ -40,7 +39,7 @@ export interface weather {
 }
 
 export interface forecast {
-  weatherIcon: string,          // Example value: '10d'
+  weather: string,              // Example value: 'Rain'
   day: number,                  // Example value: 1660384800 (Sat Aug 13)
   tempMin: number,              // Example value: 16.76,
   tempMax: number,              // Example value: 26.2,

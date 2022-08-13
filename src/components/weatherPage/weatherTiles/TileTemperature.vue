@@ -5,14 +5,12 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
-
   const WeatherStore = useWeatherStore()
 
-  const temp = computed<number>(() => {
-    return Math.round(WeatherStore.weatherData.temp)
-  })
+
+  // Variables necessary to render the component
+  const temp: number = Math.round(WeatherStore.weatherData.temp)
 
 
 </script>
@@ -24,18 +22,16 @@
   p {
     font-weight: 300;
     font-size: 64px;
-    line-height: 77px;
     letter-spacing: -0.05em;
     color: #000000;
 
     span {
       font-weight: 500;
       font-size: 24px;
-      line-height: 29px;
       letter-spacing: 0;
       color: #666666;
       vertical-align: super;
-      top: -6px; //  HARDCODED 
+      top: -6px;
     }
   }
 }

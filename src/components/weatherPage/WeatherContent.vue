@@ -1,31 +1,42 @@
 <template>
   <div class="WeatherContent">
-    <component class="InfoTile"
+    <component class="tile"
       v-for="(tileConfig, index) in tilesConfiguration" :key="index"
       :is="componentList[tileConfig.type] || TileOther" :tileConfig="tileConfig"
+    />
+
+    <TileForecast class="tile forecast"
+      v-for="(itemData, index) in daysForecasted" :key="index"
+      :forecastData="itemData"
     />
   </div>
 </template>
 
 <script setup lang="ts">
   import { useConfiguration } from '@/stores/Configuration'
+  import { useWeatherStore } from '@/stores/WeatherStore'
   import type { listOfComponents } from '@/common/types'
 
-  // Import components that will be used here
+  // Components
   import TileWeather from '@/components/weatherPage/weatherTiles/TileWeather.vue'
   import TileTemperature from '@/components/weatherPage/weatherTiles/TileTemperature.vue'
   import TileHighAndLow from '@/components/weatherPage/weatherTiles/TileHighAndLow.vue'
   import TileOther from '@/components/weatherPage/weatherTiles/TileOther.vue'
+  import TileForecast from '@/components/weatherPage/weatherTiles/TileForecast.vue'
 
   const componentList: listOfComponents = {
     weather: TileWeather,
     temperature: TileTemperature,
     highAndLow: TileHighAndLow
   }
+  
 
   // Load configuration for tiles to be rendered
   const Configuration = useConfiguration()
   const tilesConfiguration = Configuration.tilesConfiguration
+
+  const WeatherStore = useWeatherStore()
+  const daysForecasted = WeatherStore.forecastData
 
 </script>
 
@@ -34,24 +45,31 @@
 .WeatherContent {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
+  padding: 15px;
 
-  .InfoTile {
-    /* border: 1px solid gray; */
-    flex: 33%;
+  flex-grow: 1;
+  align-content: space-around;
+  justify-content: space-around;
+
+  .tile {
+    // border: 1px solid blue;
+    flex: 26%;
     flex-shrink: 0;
     overflow: hidden;
-    padding: 20px 10px;
-
+    height: 95px;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* flex: calc(33% - 20px) 0 0;
-    background-color: aliceblue;
-    margin: 10px; */
+  }
+
+  .tile.forecast {
+    max-width: 100px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    margin: 0 5px;
   }
 }
-
 
 </style>

@@ -47,7 +47,6 @@ export const useWeatherStore = defineStore('weatherStore', () => {
 
       weatherData.value = {
         weather: weatherRaw.current.weather[0].main,
-        weatherIcon: weatherRaw.current.weather[0].icon,
         temp: weatherRaw.current.temp,
         tempMin: weatherRaw.daily[0].temp.min,
         tempMax: weatherRaw.daily[0].temp.max,
@@ -65,7 +64,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
 
       for (let i = 1; i < 4; i++) {
         forecastData.value.push({
-          weatherIcon: weatherRaw.daily[i].weather[0].icon,
+          weather: weatherRaw.daily[i].weather[0].main,
           day: weatherRaw.daily[i].dt + timezoneShift,
           tempMin: weatherRaw.daily[i].temp.min,
           tempMax: weatherRaw.daily[i].temp.max,
