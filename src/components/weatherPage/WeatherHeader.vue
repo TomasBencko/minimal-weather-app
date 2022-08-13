@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-  import { RouterLink } from 'vue-router'
   import { ref } from 'vue'
   import moment from 'moment'
   import type { dictionary } from '@/common/types'
@@ -17,6 +16,7 @@
   const WeatherStore = useWeatherStore()
 
   // Components
+  import { RouterLink } from 'vue-router'
   import LocationPin from '@/assets/svg/location.svg'
 
 

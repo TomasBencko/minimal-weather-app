@@ -1,24 +1,33 @@
 <template>
-  <div class="ContentPanel">
+  <div class="ContentPanel" :class="{ expanded: isPanelExpanded }">
+  <!-- <div class="ContentPanel"> -->
     <RouterView />
   </div>
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue'
+  import { useConfiguration } from '@/stores/Configuration'
+  const Configuration = useConfiguration()
 
   // Components
   import { RouterView } from 'vue-router'
 
+
+  // Variables
+  const isPanelExpanded = computed(() => {
+    return Configuration.isPanelExpanded
+  })
+
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .ContentPanel {
   position: absolute;
   width: 100%;
   min-height: 66%;
   bottom: 0;
-  /* padding: 20px; */
   background: #FFFFFF;
   box-shadow: 0px -16px 40px rgba(0, 0, 0, 0.2);
   border-radius: 24px 24px 0 0;
@@ -26,6 +35,13 @@
 
   display: flex;
   flex-direction: column;
+
+  // Transitions
+  transition: min-height .5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.ContentPanel.expanded {
+  min-height: calc(100% - 30px);
 }
 
 @media (min-width: 1024px) {

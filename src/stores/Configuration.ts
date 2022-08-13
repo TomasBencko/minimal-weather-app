@@ -1,12 +1,15 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useConfiguration = defineStore('configuration', () => {
 
   // Bypass API calls and return placehodler data if true
-  const usePlaceholderData = true
+  const usePlaceholderData = ref<boolean>(true)
 
-  const defaultUnits = 'metric'
-  const defaultLocation = 'Košice'
+  const defaultUnits = ref<string>('metric')
+  const defaultLocation = ref<string>('Košice')
+
+  let isPanelExpanded = ref<boolean>(false)
 
   const tilesConfiguration = [
     { type: 'weather' },
@@ -20,5 +23,8 @@ export const useConfiguration = defineStore('configuration', () => {
     { type: 'daytime', label: 'Daytime' }
   ]
   
-  return { defaultUnits, defaultLocation, tilesConfiguration, usePlaceholderData }
+  return {
+    defaultUnits, defaultLocation, isPanelExpanded,
+    tilesConfiguration, usePlaceholderData
+  }
 })

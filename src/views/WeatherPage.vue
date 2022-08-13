@@ -8,14 +8,20 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
+  import { useConfiguration } from '@/stores/Configuration'
+  const WeatherStore = useWeatherStore()
+  const Configuration = useConfiguration()
 
   // Components
   import WeatherHeader from '@/components/weatherPage/WeatherHeader.vue'
   import WeatherContent from '@/components/weatherPage/WeatherContent.vue'
 
 
+  // Make the page panel shrink
+  Configuration.isPanelExpanded = false
+
+
   // Get weather data from OpenWeather API
-  const WeatherStore = useWeatherStore()
   let communicationProblems = ref<boolean>(false)
 
   try {

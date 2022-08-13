@@ -1,5 +1,4 @@
 <template>
-  <!-- <img class="bg-cover" src="@/assets/svg/bg-cover.svg" /> -->
   <Suspense>
     <ContentPanel />
 

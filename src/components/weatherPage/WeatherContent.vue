@@ -53,7 +53,7 @@
 
   .tile {
     // border: 1px solid blue;
-    flex: 26%;
+    flex: 33%;
     flex-shrink: 0;
     overflow: hidden;
     height: 95px;
