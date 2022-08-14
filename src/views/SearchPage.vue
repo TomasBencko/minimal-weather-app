@@ -1,10 +1,13 @@
 <template>
   <section class="SearchPage">
     <h1>Location</h1>
-    <input type="text" name="search" id="search" placeholder="Search city...">
+    <input
+      v-model="searchInput"
+      type="text" name="search" id="search" placeholder="Search city..."
+    >
     <div class="results">
       <LocationItem 
-        v-for="(location, index) in Configuration.locationList" :key="index"
+        v-for="(location, index) in filteredList" :key="index"
         :location="location"
       />
     </div>
@@ -12,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, computed, defineEmits } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
   import { useConfiguration } from '@/stores/Configuration'
 
@@ -24,12 +27,9 @@
   const Configuration = useConfiguration()
 
 
-  // Make the page panel expanded
-  Configuration.isPanelExpanded = true
-
-
-  // Location filtering  TODO 
-  let filteredList
+  // Make the parent panel expand
+  const emit = defineEmits(['expandPanel'])
+  emit('expandPanel')
 
 
   // Get weather data from OpenWeather API
@@ -41,8 +41,16 @@
     })
   })
 
-</script>
 
+  // Location filtering based on search input
+  const searchInput = ref<string>('')
+  const filteredList = computed(() => {
+    return Configuration.locationList.filter(
+      location => location.toLowerCase().includes(searchInput.value.toLowerCase())
+    )
+  })
+
+</script>
 
 <style lang="scss" scoped>
 

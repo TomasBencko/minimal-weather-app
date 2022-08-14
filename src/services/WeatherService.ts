@@ -11,10 +11,8 @@ if (!apiKey || import.meta.env.VITE_USE_PLACEHOLDER_DATA) {
 
   // Log warning into console, if using placeholder data
   console.warn(
-    '%cWARNING: Using placeholder data only!', 'font-weight: 600; color: red;',
-    '\nIf you want to get data from OpenWeather API, be sure \'.env.local\' is set properly:\n',
-    '\n\tVITE_WEATHER_KEY=[YOUR API KEY HERE]',
-    '\n\tVITE_USE_PLACEHOLDER_DATA=false\n '
+    `%cWARNING: Using placeholder data only!%c\nIf you want to get data from OpenWeather API, be sure %c .env.local %c is set properly:\n\n\tVITE_WEATHER_KEY=[YOUR API KEY HERE]\n\tVITE_USE_PLACEHOLDER_DATA=false\n `,
+    'font-weight: 600; color: red;', 'font-weight: unset; color: unset;', 'background: #9F9F9F50; border-radius: 4px;', 'background: unset; border-radius: unset;'
   )
 }
 

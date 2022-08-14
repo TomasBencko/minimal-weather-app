@@ -32,11 +32,9 @@ export const useConfiguration = defineStore('configuration', () => {
     { type: 'sunset', label: 'Sunset' },
     { type: 'daytime', label: 'Daytime' }
   ]
-
-  let isPanelExpanded = ref<boolean>(false)
   
   return {
-    defaultUnits, defaultLocation, isPanelExpanded,
+    defaultUnits, defaultLocation,
     tilesConfiguration, locationList,
     usePlaceholderData, minutesToExpire
   }

@@ -22,8 +22,9 @@
   const Configuration = useConfiguration()
 
 
-  // Make the page panel shrink
-  Configuration.isPanelExpanded = false
+  // Make the parent panel shrink
+  const emit = defineEmits(['shrinkPanel'])
+  emit('shrinkPanel')
 
 
   // Get weather data from OpenWeather API

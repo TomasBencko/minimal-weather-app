@@ -1,24 +1,20 @@
 <template>
   <div class="ContentPanel" :class="{ expanded: isPanelExpanded }">
-    <RouterView />
+    <RouterView @expandPanel="expandPanel" @shrinkPanel="shrinkPanel" />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
-  import { useConfiguration } from '@/stores/Configuration'
+  import { ref } from 'vue'
 
   // Components
   import { RouterView } from 'vue-router'
 
-  // Setup
-  const Configuration = useConfiguration()
 
-
-  // Variables
-  const isPanelExpanded = computed(() => {
-    return Configuration.isPanelExpanded
-  })
+  // Shrik or expand the panel based on its content
+  let isPanelExpanded = ref<boolean>(false)
+  function expandPanel() { isPanelExpanded.value = true }
+  function shrinkPanel() { isPanelExpanded.value = false }
 
 </script>
 
