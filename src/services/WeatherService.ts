@@ -1,6 +1,23 @@
 import axios from 'axios'
 
+// Get API key from '.env.local' file
 const apiKey = import.meta.env.VITE_WEATHER_KEY
+
+
+// Use placeholder data if set so in '.env.local', or if API key is not provided
+let usePlaceholderData: boolean = false
+if (!apiKey || import.meta.env.VITE_USE_PLACEHOLDER_DATA) {
+  usePlaceholderData = true
+
+  // Log warning into console, if using placeholder data
+  console.warn(
+    '%cWARNING: Using placeholder data only!', 'font-weight: 600; color: red;',
+    '\nIf you want to get data from OpenWeather API, be sure \'.env.local\' is set properly:\n',
+    '\n\tVITE_WEATHER_KEY=[YOUR API KEY HERE]',
+    '\n\tVITE_USE_PLACEHOLDER_DATA=false\n '
+  )
+}
+
 
 // Create an axios instance for OpenWeather® API
 const openWeatherAPI = axios.create({
@@ -19,18 +36,13 @@ import allWeatherData from './placeholderData/allWeatherData'
 // API calls
 export default {
   
-  getGeocoding({ q, limit = 1, usePlaceholderData = false }: {
-    q: string, limit?: number, usePlaceholderData?: boolean
+  getGeocoding({ q, limit = 1 }: {
+    q: string, limit?: number
   }): Promise<{ [key: string]: any }> {
 
     if (usePlaceholderData) {
-      // Log warning into console, if using placeholder data
-      console.warn(
-        '%cRendering placeholder data only!',
-        'font-weight: 600; color: red;',
-        '\nChange \'usePlaceholderData\' in \'@/stores/Configuration\' to false, if you want to get data from API'
-      )
-      return new Promise<{ [key: string]: any }>(resolve => resolve(geocodingData))
+      const location = q as 'Bratislava' | 'Humenné' | 'Koromľa' | 'Košice' | 'Michalovce' | 'Sobrance'
+      return new Promise<{ [key: string]: any }>(resolve => resolve(geocodingData[location]))
     }
     
     return openWeatherAPI.get(
@@ -39,8 +51,8 @@ export default {
   },
 
 
-  getAllWeatherData({ lat, lon, units = 'metric', usePlaceholderData = false }: {
-    lat: number, lon: number, units?: string, usePlaceholderData?: boolean
+  getAllWeatherData({ lat, lon, units = 'metric' }: {
+    lat: number, lon: number, units?: string
   }): Promise<{ [key: string]: any }> {
 
     if (usePlaceholderData) {

@@ -1,6 +1,5 @@
 <template>
   <div class="ContentPanel" :class="{ expanded: isPanelExpanded }">
-  <!-- <div class="ContentPanel"> -->
     <RouterView />
   </div>
 </template>

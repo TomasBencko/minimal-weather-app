@@ -42,8 +42,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
 
       // Get coordinates for selected location (by name query)
       const locationRaw = (await WeatherService.getGeocoding({
-        q: location,
-        usePlaceholderData: Configuration.usePlaceholderData
+        q: location
       })).data[0]
 
       locationData = {
@@ -58,8 +57,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
       const weatherRaw = (await WeatherService.getAllWeatherData({
         lat: locationData.lat,
         lon: locationData.lon,
-        units: Configuration.defaultUnits,
-        usePlaceholderData: Configuration.usePlaceholderData
+        units: Configuration.defaultUnits
       })).data
       
       const daytime: number = weatherRaw.current.sunset - weatherRaw.current.sunrise
