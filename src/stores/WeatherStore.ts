@@ -19,13 +19,25 @@ export const useWeatherStore = defineStore('weatherStore', () => {
   /* STORE ACTIONS */
   async function fetchWeatherAPIData (location: string = selectedLocation.value) {
 
-    // For testing purposes only... delete later
-    if (location === 'Koromľa') await new Promise(r => setTimeout(r, 2000))
-    
+    // Check if data isn't here already...
+    if (weatherData.value[location]) {
+      const timeNow = new Date()
+      const expirationTime = weatherData.value[location].expiration
+
+      console.log(`Data for ${location} already cached`)
+      if (timeNow < expirationTime) return
+    }
+
+
+    // ...otherwise, get new data from API
     try {
+
+      if (location === 'Koromľa') await new Promise(r => setTimeout(r, 2000)) // For testing purposes only... delete later
+
       let locationData: location = {} as location
       let currentData: current = {} as current
       let forecastData: forecast[] = [] as forecast[]
+
 
       // Get coordinates for selected location (by name query)
       const locationRaw = (await WeatherService.getGeocoding({
@@ -79,14 +91,18 @@ export const useWeatherStore = defineStore('weatherStore', () => {
       }
 
 
-      // Save processed data to the store
+      // Save processed data to the store together with an expiration date
+      const expiration: Date = new Date()
+      expiration.setMinutes(expiration.getMinutes() + Configuration.minutesToExpire)
+
       weatherData.value[location] = {
         locationData,
         currentData,
-        forecastData
+        forecastData,
+        expiration
       }
 
-      console.log(`Weather data for ${location} processed successfully`);
+      console.log(`Weather data for ${location} processed successfully`)
       
 
     // Error handling
@@ -96,6 +112,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
     }
   }
 
+  
 
   /* EXTRACTING DATA */
   return { weatherData, selectedLocation, fetchWeatherAPIData }

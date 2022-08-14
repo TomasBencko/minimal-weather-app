@@ -20,9 +20,10 @@ export interface listOfSVGIcons {
 // Used in WeatherStore.ts
 export interface weatherDataAll {
   [key: string]: {
-    locationData: location
-    currentData: current
-    forecastData: forecast[]
+    locationData: location,
+    currentData: current,
+    forecastData: forecast[],
+    expiration: Date
   }
 }
 
