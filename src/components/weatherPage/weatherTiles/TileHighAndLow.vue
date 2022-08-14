@@ -17,8 +17,10 @@
 
 
   // Variables necessary to render the component
-  const tempMin: number = Math.round(WeatherStore.weatherData.tempMin)
-  const tempMax: number = Math.round(WeatherStore.weatherData.tempMax)
+  const location = WeatherStore.selectedLocation
+  const currentData = WeatherStore.weatherData[location].currentData
+  const tempMin: number = Math.round(currentData.tempMin)
+  const tempMax: number = Math.round(currentData.tempMax)
 
 </script>
 

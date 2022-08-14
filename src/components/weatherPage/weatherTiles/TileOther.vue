@@ -32,9 +32,13 @@
 
   // Variables necessary to render the component
   const props = defineProps({ tileConfig: { type: Object, required: true } })
+  
   type possibleKeys = 'humidity' | 'pressure' | 'wind' | 'sunrise' | 'sunset' | 'daytime'
   const tileType: possibleKeys = props.tileConfig.type
-  const valueRaw: number = WeatherStore.weatherData[tileType]
+
+  const location = WeatherStore.selectedLocation
+  const currentData = WeatherStore.weatherData[location].currentData
+  const valueRaw: number = currentData[tileType]
   let valueFormated: string
 
   switch (tileType) {

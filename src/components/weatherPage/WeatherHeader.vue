@@ -2,7 +2,7 @@
   <div class="WeatherHeader">
     <div class="date">{{ date }}</div>
     <div class="location">
-      <RouterLink to="/search">{{ location }}, {{ country }}</RouterLink>
+      <RouterLink to="/search">{{ locationName }}, {{ country }}</RouterLink>
       <LocationPin class="icon" />
     </div>
   </div>
@@ -21,9 +21,11 @@
 
 
   // Variables necessary to render the component
-  const location: string = WeatherStore.locationData.location
+  const location:string = WeatherStore.selectedLocation
+  const locationData = WeatherStore.weatherData[location].locationData
+  const locationName: string = locationData.location
   const country = (() => {
-    const countryCode: string = WeatherStore.locationData.country
+    const countryCode: string = locationData.country
     const codeDictionary: dictionary = { SK: 'Slovakia', CZ: 'Czechia' }
     return codeDictionary[countryCode] || countryCode
   })()

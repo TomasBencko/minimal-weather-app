@@ -18,6 +18,14 @@ export interface listOfSVGIcons {
 
 
 // Used in WeatherStore.ts
+export interface weatherDataAll {
+  [key: string]: {
+    locationData: location
+    currentData: current
+    forecastData: forecast[]
+  }
+}
+
 export interface location {
   location: string,             // Example value: 'Košice'
   country: string,              // Example value: 'SK'
@@ -25,7 +33,7 @@ export interface location {
   lon: number                   // Example value: 21.2497
 }
 
-export interface weather {
+export interface current {
   weather: string,              // Example value: 'Rain'
   temp: number,                 // Example value: 20.61
   tempMin: number,              // Example value: 21.09

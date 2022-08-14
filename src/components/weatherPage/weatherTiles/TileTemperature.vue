@@ -10,7 +10,9 @@
 
 
   // Variables necessary to render the component
-  const temp: number = Math.round(WeatherStore.weatherData.temp)
+  const location = WeatherStore.selectedLocation
+  const currentData = WeatherStore.weatherData[location].currentData
+  const temp: number = Math.round(currentData.temp)
 
 
 </script>

@@ -14,7 +14,9 @@
 
 
   // Variables necessary to render the component
-  const weather: string = WeatherStore.weatherData.weather
+  const location = WeatherStore.selectedLocation
+  const currentData = WeatherStore.weatherData[location].currentData
+  const weather: string = currentData.weather
   
 </script>
 
