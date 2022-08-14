@@ -11,7 +11,9 @@
 
 </script>
 
-<style>
+<style lang="scss">
+
+$maxWidth: 520px;
 
 #app {
   background-image: url(./assets/svg/bg-cover.svg);
@@ -21,7 +23,7 @@
   background-size: contain;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: $maxWidth) {
   #app {
     background-size: cover;
   }
