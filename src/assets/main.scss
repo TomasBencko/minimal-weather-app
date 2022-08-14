@@ -1,0 +1,68 @@
+
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;1,500&display=swap');
+
+
+// Reset CSS settings
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+html, body, #app {
+  height: 100%;
+  width: 100%;
+}
+
+
+:root {
+
+  // Set global variables
+  --font-huge: 4rem; // 64px +
+  --font-big: 1.5rem; // 24px +
+  --font-medium: 1.125rem; // 18px +
+  --font-base: 1rem; // 16px +
+  --font-small: 0.875rem; // 14px +
+  --font-tiny: 0.5rem; // 8px +
+
+  --font-spacing-narrow: -0.05em;
+  --font-spacing-wide: 0.1em;
+
+
+  --color-black: #000000;
+  --color-dark-1: #444444;
+  --color-dark-2: #666666;
+  --color-dark-3: #999999;
+  --color-white-soft: #F3F3F3;
+
+  --color-blue-transparent: rgba(13, 159, 234, 0.08);
+  --color-blue: #0DA0EA;
+
+
+  // Set default font settings
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  font-family: 'Barlow', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--color-black);
+  font-size: 16px;
+}
+
+
+
+@media (hover: hover) {
+  a:hover {
+    /* background-color: hsla(160, 100%, 37%, 0.2); */
+  }
+}
+
+@media (min-width: 1200px) {
+  
+  :root {
+    font-size: clamp(16px, 1.3vmax, 26px);
+  }
+}

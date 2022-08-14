@@ -46,16 +46,15 @@
     .location {
       flex-grow: 1;
 
-      font-weight: 400;
-      font-size: 18px;
-      letter-spacing: -0.05em;
-      color: #444444;
+      font-size: var(--font-medium);
+      letter-spacing: var(--font-spacing-narrow);
+      color: var(--color-dark-1);
     }
 
     .temperature {
       font-weight: 300;
-      font-size: 16px;
-      color: #666666;
+      font-size: var(--font-base);
+      color: var(--color-dark-2);
     }
   }
 

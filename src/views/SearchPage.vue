@@ -59,9 +59,9 @@
 
   h1 {
     font-weight: 500;
-    font-size: 16px;
+    font-size: var(--font-base);
     text-align: center;
-    color: #999999;
+    color: var(--color-dark-3);
 
     margin-bottom: 30px;
   }
@@ -69,14 +69,14 @@
   input {
     font-style: italic;
     font-weight: 500;
-    font-size: 18px;
-    letter-spacing: -0.05em;
-    color: #9F9F9F;
+    font-size: var(--font-medium);
+    letter-spacing: var(--font-spacing-narrow);
+    color: var(--color-dark-3);
 
     width: 100%;
     border: none;
     border-radius: 4px;
-    background: #F3F3F3;
+    background: var(--color-white-soft);
     padding: 10px 47px 10px 15px;
     outline: none;
     margin-bottom: 15px;

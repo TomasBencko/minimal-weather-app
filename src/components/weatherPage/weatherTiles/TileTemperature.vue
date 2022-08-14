@@ -25,15 +25,14 @@
 
   p {
     font-weight: 300;
-    font-size: 64px;
-    letter-spacing: -0.05em;
-    color: #000000;
+    font-size: var(--font-huge);
+    letter-spacing: var(--font-spacing-narrow);
+    color: var(--color-black);
 
     span {
       font-weight: 500;
-      font-size: 24px;
-      letter-spacing: 0;
-      color: #666666;
+      font-size: var(--font-big);
+      color: var(--color-dark-2);
       vertical-align: super;
       top: -6px;
     }

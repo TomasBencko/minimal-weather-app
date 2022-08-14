@@ -56,8 +56,6 @@
 <style lang="scss" scoped>
 
 .WeatherPage {
-  padding-bottom: 4px;
-  
   flex-grow: 1;
 
   display: flex;

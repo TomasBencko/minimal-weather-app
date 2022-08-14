@@ -55,10 +55,10 @@
     /* flex-grow: 1;
     text-align: center; */
 
-    font-size: 14px;
+    font-size: var(--font-small);
     line-height: 17px;
     text-align: center;
-    color: #999999;
+    color: var(--color-dark-3);
 
     white-space: nowrap;
     overflow: hidden;
@@ -68,16 +68,16 @@
 
   .location {
     border-bottom-left-radius: 24px;
-    background: rgba(13, 159, 234, 0.08);
+    background: var(--color-blue-transparent);
     white-space: nowrap;
     padding-left: 10px;
 
     a {
       font-weight: 500;
-      font-size: 16px;
+      font-size: var(--font-base);
       line-height: 19px;
       text-align: center;
-      color: #0DA0EA;
+      color: var(--color-blue);
       
       text-decoration: none;
     }

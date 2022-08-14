@@ -84,16 +84,16 @@
 
   .value {
     font-weight: 500;
-    font-size: 16px;
-    letter-spacing: -0.05em;
-    color: #444444;
+    font-size: var(--font-base);
+    letter-spacing: var(--font-spacing-narrow);
+    color: var(--color-dark-1);
   }
 
   .label {
     font-weight: 500;
-    font-size: 8px;
-    letter-spacing: 0.1em;
-    color: #999999;
+    font-size: var(--font-tiny);
+    letter-spacing: var(--font-spacing-wide);
+    color: var(--color-dark-3);
   }
 }
 

@@ -56,8 +56,13 @@
     // border: 1px solid blue;
     flex: 33%;
     flex-shrink: 0;
+    // background: red;
     overflow: hidden;
     height: 95px;
+    
+    @media (min-height: 900px) { height: 110px; }
+    @media (min-height: 1000px) { height: 120px; }
+    @media (min-height: 1100px) { height: 130px; }
     
     display: flex;
     flex-direction: column;
@@ -66,7 +71,8 @@
   }
 
   .tile.forecast {
-    max-width: 100px;
+    flex: 10%;
+    max-width: 6.25rem;
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     margin: 0 5px;

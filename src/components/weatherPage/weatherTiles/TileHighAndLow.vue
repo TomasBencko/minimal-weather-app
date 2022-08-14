@@ -39,9 +39,9 @@
     
     p {
       font-weight: 300;
-      font-size: 16px;
+      font-size: var(--font-base);
       line-height: 19px;
-      color: #666666;
+      color: var(--color-dark-2);
 
       .icon {
         display: inline-block;

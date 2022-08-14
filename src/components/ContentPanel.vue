@@ -22,8 +22,8 @@
 
 $bgAspectRation: 0.7;
 $borderRadius: 24px;
-$maxWidth: 520px;
-$maxHeight: 700px;
+$maxWidth: 600px;
+$maxHeight: 900px;
 
 .ContentPanel {
   position: absolute;
@@ -47,23 +47,31 @@ $maxHeight: 700px;
   min-height: calc(100% - $topMargin);
 }
 
-@media only screen and (min-width: $maxWidth) { // 1024px
+@media only screen and (min-width: 520px) {
   .ContentPanel {
-    left: max($maxWidth / 2, 33%);
+    left: max(520px / 2, 50%);
     bottom: 50%;
     transform: translate(-50%, 50%);
     
     min-height: unset;
-    width: clamp(400px, 20%, $maxWidth);
-    height: clamp(480px, 60%, $maxHeight);
+    width: clamp(400px, 30%, $maxWidth);
+    height: clamp(480px, 66%, $maxHeight);
 
     border-radius: $borderRadius;
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.15);
+
     transition: height .3s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   .ContentPanel.expanded {
     min-height: unset;
-    height: clamp(480px, 80%, 900px);
+    height: clamp(480px, 80%, $maxHeight * 1.3);
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .ContentPanel {
+    left: max(520px / 2, 33%);
   }
 }
 

@@ -22,7 +22,7 @@
   
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .icon {
   height: 30px;
@@ -31,9 +31,9 @@
 
 p {
   font-weight: 500;
-  font-size: 18px;
-  letter-spacing: -0.05em;
-  color: #000000;
+  font-size: var(--font-medium);
+  letter-spacing: var(--font-spacing-narrow);
+  color: var(--color-black);
 }
 
 </style>
