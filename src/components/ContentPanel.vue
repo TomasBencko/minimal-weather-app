@@ -8,10 +8,12 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useConfiguration } from '@/stores/Configuration'
-  const Configuration = useConfiguration()
 
   // Components
   import { RouterView } from 'vue-router'
+
+  // Setup
+  const Configuration = useConfiguration()
 
 
   // Variables
@@ -37,7 +39,7 @@
   flex-direction: column;
 
   // Transitions
-  transition: min-height .4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: min-height .3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .ContentPanel.expanded {

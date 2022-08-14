@@ -6,11 +6,13 @@
 
 <script setup lang="ts">
   import { useWeatherStore } from '@/stores/WeatherStore'
+
+  // Setup
   const WeatherStore = useWeatherStore()
 
 
   // Variables necessary to render the component
-  const location = WeatherStore.selectedLocation
+  const location = WeatherStore.locationSelected
   const currentData = WeatherStore.weatherData[location].currentData
   const temp: number = Math.round(currentData.temp)
 

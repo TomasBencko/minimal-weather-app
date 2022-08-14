@@ -10,7 +10,6 @@
   import moment from 'moment'
   import type { listOfSVGIcons } from '@/common/types'
   import { useWeatherStore } from '@/stores/WeatherStore'
-  const WeatherStore = useWeatherStore()
 
   // Components
   import HumidityIcon from '@/assets/svg/027-humidity.svg'
@@ -20,6 +19,8 @@
   import SunsetIcon from '@/assets/svg/007-sunset.svg'
   import DaytimeIcon from '@/assets/svg/sand-clock.svg'
 
+  // Setup
+  const WeatherStore = useWeatherStore()
   const iconList: listOfSVGIcons = {
     humidity: HumidityIcon,
     pressure: PressureIcon,
@@ -36,7 +37,7 @@
   type possibleKeys = 'humidity' | 'pressure' | 'wind' | 'sunrise' | 'sunset' | 'daytime'
   const tileType: possibleKeys = props.tileConfig.type
 
-  const location = WeatherStore.selectedLocation
+  const location = WeatherStore.locationSelected
   const currentData = WeatherStore.weatherData[location].currentData
   const valueRaw: number = currentData[tileType]
   let valueFormated: string

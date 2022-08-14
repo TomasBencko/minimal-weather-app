@@ -15,11 +15,13 @@
   import { onMounted, ref } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
   import { useConfiguration } from '@/stores/Configuration'
-  const WeatherStore = useWeatherStore()
-  const Configuration = useConfiguration()
 
   // Components
   import LocationItem from '@/components/searchPage/LocationItem.vue'
+
+  // Setup
+  const WeatherStore = useWeatherStore()
+  const Configuration = useConfiguration()
 
 
   // Make the page panel expanded

@@ -10,6 +10,11 @@ const router = createRouter({
       component: WeatherPage
     },
     {
+      path: '/w/:location',
+      name: 'weather',
+      component: WeatherPage
+    },
+    {
       path: '/search',
       name: 'search',
       // route level code-splitting

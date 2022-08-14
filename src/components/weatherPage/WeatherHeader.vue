@@ -13,15 +13,17 @@
   import moment from 'moment'
   import type { dictionary } from '@/common/types'
   import { useWeatherStore } from '@/stores/WeatherStore'
-  const WeatherStore = useWeatherStore()
 
   // Components
   import { RouterLink } from 'vue-router'
   import LocationPin from '@/assets/svg/location.svg'
 
+  // Setup
+  const WeatherStore = useWeatherStore()
+
 
   // Variables necessary to render the component
-  const location:string = WeatherStore.selectedLocation
+  const location:string = WeatherStore.locationSelected
   const locationData = WeatherStore.weatherData[location].locationData
   const locationName: string = locationData.location
   const country = (() => {

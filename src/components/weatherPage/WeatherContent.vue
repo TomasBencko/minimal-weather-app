@@ -36,7 +36,7 @@
   const tilesConfiguration = Configuration.tilesConfiguration
 
   const WeatherStore = useWeatherStore()
-  const location = WeatherStore.selectedLocation
+  const location = WeatherStore.locationSelected
   const daysForecasted = WeatherStore.weatherData[location].forecastData
 
 </script>

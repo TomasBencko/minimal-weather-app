@@ -7,14 +7,16 @@
 
 <script setup lang="ts">
   import { useWeatherStore } from '@/stores/WeatherStore'
-  const WeatherStore = useWeatherStore()
 
   // Components
   import WeatherIcon from '@/components/weatherPage/WeatherIcon.vue'
 
+  // Setup
+  const WeatherStore = useWeatherStore()
+
 
   // Variables necessary to render the component
-  const location = WeatherStore.selectedLocation
+  const location = WeatherStore.locationSelected
   const currentData = WeatherStore.weatherData[location].currentData
   const weather: string = currentData.weather
   

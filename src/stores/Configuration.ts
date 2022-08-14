@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const useConfiguration = defineStore('configuration', () => {
 
   // Bypass API calls and return placehodler data if true
-  const usePlaceholderData = ref<boolean>(true)
+  const usePlaceholderData = ref<boolean>(false)
 
   // Set number of minutes for API data to be cached
   const minutesToExpire = ref<number>(20)
@@ -21,8 +21,6 @@ export const useConfiguration = defineStore('configuration', () => {
     'Sobrance'
   ])
 
-  let isPanelExpanded = ref<boolean>(false)
-
   const tilesConfiguration = [
     { type: 'weather' },
     { type: 'temperature' },
@@ -34,6 +32,8 @@ export const useConfiguration = defineStore('configuration', () => {
     { type: 'sunset', label: 'Sunset' },
     { type: 'daytime', label: 'Daytime' }
   ]
+
+  let isPanelExpanded = ref<boolean>(false)
   
   return {
     defaultUnits, defaultLocation, isPanelExpanded,

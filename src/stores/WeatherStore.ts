@@ -8,23 +8,23 @@ import type { weatherDataAll, location, current, forecast } from '@/common/types
 
 
 export const useWeatherStore = defineStore('weatherStore', () => {
+
+  // Setup
   const Configuration = useConfiguration()
 
 
   /* STORE STATE */
   let weatherData = ref<weatherDataAll>({} as weatherDataAll)
-  let selectedLocation = ref<string>(Configuration.defaultLocation)
+  let locationSelected = ref<string>(Configuration.defaultLocation)
   
   
   /* STORE ACTIONS */
-  async function fetchWeatherAPIData (location: string = selectedLocation.value) {
+  async function fetchWeatherAPIData (location: string = locationSelected.value) {
 
     // Check if data isn't here already...
     if (weatherData.value[location]) {
       const timeNow = new Date()
       const expirationTime = weatherData.value[location].expiration
-
-      console.log(`Data for ${location} already cached`)
       if (timeNow < expirationTime) return
     }
 
@@ -32,7 +32,8 @@ export const useWeatherStore = defineStore('weatherStore', () => {
     // ...otherwise, get new data from API
     try {
 
-      if (location === 'Koromľa') await new Promise(r => setTimeout(r, 2000)) // For testing purposes only... delete later
+      // For testing purposes only... delete later
+      // if (location === 'Koromľa') await new Promise(r => setTimeout(r, 2000))
 
       let locationData: location = {} as location
       let currentData: current = {} as current
@@ -102,7 +103,9 @@ export const useWeatherStore = defineStore('weatherStore', () => {
         expiration
       }
 
-      console.log(`Weather data for ${location} processed successfully`)
+
+      // If no problem occured proceed
+      console.log(`Weather data for ${location} fetched successfully`)
       
 
     // Error handling
@@ -115,5 +118,5 @@ export const useWeatherStore = defineStore('weatherStore', () => {
   
 
   /* EXTRACTING DATA */
-  return { weatherData, selectedLocation, fetchWeatherAPIData }
+  return { weatherData, locationSelected, fetchWeatherAPIData }
 })

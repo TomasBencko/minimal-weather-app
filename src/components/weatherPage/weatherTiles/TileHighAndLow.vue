@@ -9,15 +9,17 @@
 
 <script setup lang="ts">
   import { useWeatherStore } from '@/stores/WeatherStore'
-  const WeatherStore = useWeatherStore()
 
   // Components
   import CurrentHigh from '@/assets/svg/current-high.svg'
   import CurrentLow from '@/assets/svg/current-low.svg'
 
+  // Setup
+  const WeatherStore = useWeatherStore()
+
 
   // Variables necessary to render the component
-  const location = WeatherStore.selectedLocation
+  const location = WeatherStore.locationSelected
   const currentData = WeatherStore.weatherData[location].currentData
   const tempMin: number = Math.round(currentData.tempMin)
   const tempMax: number = Math.round(currentData.tempMax)
