@@ -51,12 +51,13 @@ export default {
   },
 
 
-  getAllWeatherData({ lat, lon, units = 'metric' }: {
-    lat: number, lon: number, units?: string
+  getAllWeatherData({ lat, lon, units = 'metric', q = 'Košice' }: {
+    lat: number, lon: number, units?: string, q?: string
   }): Promise<{ [key: string]: any }> {
 
     if (usePlaceholderData) {
-      return new Promise<{ [key: string]: any }>(resolve => resolve(allWeatherData))
+      const location = q as 'Bratislava' | 'Humenné' | 'Koromľa' | 'Košice' | 'Michalovce' | 'Sobrance'
+      return new Promise<{ [key: string]: any }>(resolve => resolve(allWeatherData[location]))
     }
     
     return openWeatherAPI.get(

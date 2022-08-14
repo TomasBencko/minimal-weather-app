@@ -57,7 +57,8 @@ export const useWeatherStore = defineStore('weatherStore', () => {
       const weatherRaw = (await WeatherService.getAllWeatherData({
         lat: locationData.lat,
         lon: locationData.lon,
-        units: Configuration.defaultUnits
+        units: Configuration.defaultUnits,
+        q: location
       })).data
       
       const daytime: number = weatherRaw.current.sunset - weatherRaw.current.sunrise
@@ -103,7 +104,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
 
 
       // If no problem occured proceed
-      console.log(`Weather data for ${location} fetched successfully`)
+      console.log(`✅ Weather data for ${location} fetched successfully`)
       
 
     // Error handling
