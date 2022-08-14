@@ -11,6 +11,7 @@ export const useWeatherStore = defineStore('weatherStore', () => {
   const Configuration = useConfiguration()
 
   /* STORE STATE */
+  // let weatherDatsass
   let locationData = ref<location>({} as location)
   let weatherData = ref<weather>({} as weather)
   let forecastData = ref<forecast[]>([] as forecast[])
@@ -70,6 +71,11 @@ export const useWeatherStore = defineStore('weatherStore', () => {
           tempMax: weatherRaw.daily[i].temp.max,
         })
       }
+
+
+
+      console.log(`Weather data for ${location} processed successfully`);
+      
 
 
     // Error handling

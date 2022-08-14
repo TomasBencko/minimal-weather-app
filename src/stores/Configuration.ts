@@ -9,6 +9,15 @@ export const useConfiguration = defineStore('configuration', () => {
   const defaultUnits = ref<string>('metric')
   const defaultLocation = ref<string>('Košice')
 
+  const locationList = ref<string[]>([
+    'Bratislava',
+    'Humenné',
+    'Koromľa',
+    'Košice',
+    'Michalovce',
+    'Sobrance'
+  ])
+
   let isPanelExpanded = ref<boolean>(false)
 
   const tilesConfiguration = [
@@ -25,6 +34,7 @@ export const useConfiguration = defineStore('configuration', () => {
   
   return {
     defaultUnits, defaultLocation, isPanelExpanded,
-    tilesConfiguration, usePlaceholderData
+    tilesConfiguration, locationList,
+    usePlaceholderData
   }
 })
