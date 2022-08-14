@@ -37,7 +37,6 @@
     }
 
     dataLoaded.value = true
-    console.log('DATA HAS BEEN LOADED')
   })
 
 </script>

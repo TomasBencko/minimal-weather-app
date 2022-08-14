@@ -18,6 +18,10 @@ export const useWeatherStore = defineStore('weatherStore', () => {
   
   /* STORE ACTIONS */
   async function fetchWeatherAPIData (location: string = selectedLocation.value) {
+
+    // For testing purposes only... delete later
+    if (location === 'Koromľa') await new Promise(r => setTimeout(r, 2000))
+    
     try {
       let locationData: location = {} as location
       let currentData: current = {} as current

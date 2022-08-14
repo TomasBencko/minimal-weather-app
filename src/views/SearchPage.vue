@@ -3,12 +3,10 @@
     <h1>Location</h1>
     <input type="text" name="search" id="search" placeholder="Search city...">
     <div class="results">
-      <RouterLink to="/"
+      <LocationItem 
         v-for="(location, index) in Configuration.locationList" :key="index"
-      >
-        <span class="location">{{ location }}</span>
-        <span class="temperature">25°C</span>
-      </RouterLink>
+        :location="location"
+      />
     </div>
   </section>
 </template>
@@ -21,36 +19,25 @@
   const Configuration = useConfiguration()
 
   // Components
-  import { RouterLink } from 'vue-router'
+  import LocationItem from '@/components/searchPage/LocationItem.vue'
 
 
   // Make the page panel expanded
   Configuration.isPanelExpanded = true
 
 
-
-  const listOfLocations = Configuration.locationList
-  let filteredList //  TODO 
+  // Location filtering  TODO 
+  let filteredList
 
 
   // Get weather data from OpenWeather API
-  let communicationProblems = ref<boolean>(false)
-  let dataLoaded = ref<boolean>(false)
+  const listOfLocations = Configuration.locationList
 
-  // onMounted(async () => {
-  //   try {
-  //     listOfLocations.forEach(async (location) => {
-  //       await WeatherStore.fetchWeatherAPIData(location)
-  //     })
-      
-  //   } catch (error) {
-  //     console.log(error)
-  //     communicationProblems.value = true
-  //   }
-
-  //   dataLoaded.value = true
-  //   console.log('DATA HAS BEEN LOADED')
-  // })
+  onMounted(() => {
+    listOfLocations.forEach((location) => {
+      WeatherStore.fetchWeatherAPIData(location)
+    })
+  })
 
 </script>
 
@@ -59,33 +46,6 @@
 
 .SearchPage {
   padding: 30px 20px 20px;
-
-  .results {
-    padding: 15px;
-
-    a {
-      // display: block;
-      margin-bottom: 10px;
-
-      display: flex;
-      text-decoration: none;
-
-      .location {
-        flex-grow: 1;
-
-        font-weight: 400;
-        font-size: 18px;
-        letter-spacing: -0.05em;
-        color: #444444;
-      }
-
-      .temperature {
-        font-weight: 300;
-        font-size: 16px;
-        color: #666666;
-      }
-    }
-  }
 
   h1 {
     font-weight: 500;
@@ -115,6 +75,10 @@
     background-repeat: no-repeat;
     background-position: right 15px center;
     background-size: 11px;
+  }
+
+  .results {
+    padding: 15px;
   }
 }
 
