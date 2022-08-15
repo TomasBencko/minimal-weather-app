@@ -10,15 +10,15 @@
 <script setup lang="ts">
   import { useWeatherStore } from '@/stores/WeatherStore'
 
-  // Components
+  /* COMPONENTS */
   import CurrentHigh from '@/assets/svg/current-high.svg'
   import CurrentLow from '@/assets/svg/current-low.svg'
 
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
 
 
-  // Variables necessary to render the component
+  /* VARIABLES */
   const location = WeatherStore.locationSelected
   const currentData = WeatherStore.weatherData[location].currentData
   const tempMin: number = Math.round(currentData.tempMin)
@@ -33,8 +33,8 @@
   div {
     text-align: right;
 
-    p:first-child {
-      margin-bottom: 10px;
+    p:first-of-type {
+      margin-bottom: 0.8rem; // 13px
     }
     
     p {
@@ -45,7 +45,7 @@
 
       .icon {
         display: inline-block;
-        height: 8px;
+        height: 0.5rem; // 8px
         margin-left: 2px;
       }
 

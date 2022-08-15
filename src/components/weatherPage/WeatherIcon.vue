@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 
-  // Components
+  /* COMPONENTS */
   import Sunny from '@/assets/svg/007-sunny.svg'
   import Clouds from '@/assets/svg/013-sunny.svg'
   import Cloudy from '@/assets/svg/014-cloudy.svg'

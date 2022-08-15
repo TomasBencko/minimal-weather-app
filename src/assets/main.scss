@@ -10,6 +10,7 @@
   padding: 0;
   position: relative;
   font-weight: normal;
+  user-select: none;
 }
 
 html, body, #app {
@@ -39,6 +40,7 @@ html, body, #app {
   --color-white-soft: #F3F3F3;
 
   --color-blue-transparent: rgba(13, 159, 234, 0.08);
+  --color-blue-transparent-2: rgba(13, 159, 234, 0.16);
   --color-blue: #0DA0EA;
 
 
@@ -52,17 +54,10 @@ html, body, #app {
   font-size: 16px;
 }
 
-
-
-@media (hover: hover) {
-  a:hover {
-    /* background-color: hsla(160, 100%, 37%, 0.2); */
-  }
+@media (min-width: 520px) {
+  :root { font-size: clamp(16px, 1.3vmax, 21px); }
 }
 
-@media (min-width: 1200px) {
-  
-  :root {
-    font-size: clamp(16px, 1.3vmax, 26px);
-  }
+@media (min-width: 1500px) {
+  :root { font-size: clamp(16px, 1.3vmax, 26px); }
 }

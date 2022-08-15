@@ -3,7 +3,12 @@
     <WeatherHeader v-if="dataLoaded" />
     <WeatherContent v-if="dataLoaded" />
 
-    <div class="loading" v-else="dataLoaded">Loading...</div>
+    <div class="message error" v-else-if="communicationProblems">
+      <p>A communication error with</p>
+      <p>OpenWeatherAPI has occurred</p>
+      <p>We're sorry for the inconvenience</p>
+    </div>
+    <div class="message" v-else>Loading...</div>
   </section>
 </template>
 
@@ -13,11 +18,11 @@
   import { useWeatherStore } from '@/stores/WeatherStore'
   import { useConfiguration } from '@/stores/Configuration'
 
-  // Components
+  /* COMPONENTS */
   import WeatherHeader from '@/components/weatherPage/WeatherHeader.vue'
   import WeatherContent from '@/components/weatherPage/WeatherContent.vue'
   
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
   const Configuration = useConfiguration()
 
@@ -41,17 +46,15 @@
   onMounted(async () => {
     try {
       await WeatherStore.fetchWeatherAPIData(location)
+      dataLoaded.value = true
       
     } catch (error) {
       console.log(error)
       communicationProblems.value = true
     }
-    
-    dataLoaded.value = true
   })
 
 </script>
-
 
 <style lang="scss" scoped>
 
@@ -60,13 +63,22 @@
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 
-  .loading {
+  .message {
     flex-grow: 1;
 
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .error {
+    flex-direction: column;
+
+    p:last-of-type {
+      margin-top: 20px;
+    }
   }
 }
 

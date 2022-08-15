@@ -8,14 +8,14 @@
 <script setup lang="ts">
   import { useWeatherStore } from '@/stores/WeatherStore'
 
-  // Components
+  /* COMPONENTS */
   import WeatherIcon from '@/components/weatherPage/WeatherIcon.vue'
 
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
 
 
-  // Variables necessary to render the component
+  /* VARIABLES */
   const location = WeatherStore.locationSelected
   const currentData = WeatherStore.weatherData[location].currentData
   const weather: string = currentData.weather
@@ -25,7 +25,7 @@
 <style lang="scss" scoped>
 
 .icon {
-  height: 30px;
+  height: 1.875rem; // 30px
   margin-bottom: 4px;
 }
 

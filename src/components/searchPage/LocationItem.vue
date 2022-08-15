@@ -1,5 +1,5 @@
 <template>
-  <div class="LocationData"
+  <div class="LocationItem"
     @click="selectWeather"
   >
     <span class="location">{{ location }}</span>
@@ -12,12 +12,12 @@
   import { useRouter } from 'vue-router'
   import { useWeatherStore } from '@/stores/WeatherStore'
 
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
   const router = useRouter()
 
 
-  // Variables necessary to render the component
+  /* VARIABLES */
   const props = defineProps({ location: { type: String, required: true } })
     
   const temperature = computed(() => {
@@ -36,12 +36,13 @@
 
 <style lang="scss" scoped>
   
-  .LocationData {
-    margin-bottom: 10px;
+  .LocationItem {
+    padding: 5px 15px;
     cursor: pointer;
 
     display: flex;
     text-decoration: none;
+    border-radius: 4px;
 
     .location {
       flex-grow: 1;
@@ -56,6 +57,10 @@
       font-size: var(--font-base);
       color: var(--color-dark-2);
     }
+  }
+
+  .LocationData:hover {
+    background: var(--color-blue-transparent);
   }
 
 </style>

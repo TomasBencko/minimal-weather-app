@@ -11,7 +11,7 @@
   import type { listOfSVGIcons } from '@/common/types'
   import { useWeatherStore } from '@/stores/WeatherStore'
 
-  // Components
+  /* COMPONENTS */
   import HumidityIcon from '@/assets/svg/027-humidity.svg'
   import PressureIcon from '@/assets/svg/050-barometer.svg'
   import WindIcon from '@/assets/svg/001-wind.svg'
@@ -19,7 +19,7 @@
   import SunsetIcon from '@/assets/svg/007-sunset.svg'
   import DaytimeIcon from '@/assets/svg/sand-clock.svg'
 
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
   const iconList: listOfSVGIcons = {
     humidity: HumidityIcon,
@@ -31,7 +31,7 @@
   }
 
 
-  // Variables necessary to render the component
+  /* VARIABLES */
   const props = defineProps({ tileConfig: { type: Object, required: true } })
   
   type possibleKeys = 'humidity' | 'pressure' | 'wind' | 'sunrise' | 'sunset' | 'daytime'
@@ -53,7 +53,7 @@
   }
 
 
-  // Functions to format raw values
+  /* HELPERS */
   function formatPercentages(value: number): string {
     return Math.round(value) + '%'
   }
@@ -77,8 +77,8 @@
 .TileOther {
 
   .icon {
-    max-width: 24px;
-    max-height: 24px;
+    max-width: 1.5rem; // 24px
+    max-height: 1.5rem; // 24px
     margin-bottom: 10px;
   }
 

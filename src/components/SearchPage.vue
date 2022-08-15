@@ -1,12 +1,12 @@
 <template>
   <section class="SearchPage">
     <h1>Location</h1>
-    <input
-      v-model="searchInput"
-      type="text" name="search" id="search" placeholder="Search city..."
+    <input id="search"
+      type="text" name="search" autocomplete="off"
+      v-model="searchInput" placeholder="Search city..."
     >
     <div class="results">
-      <LocationItem 
+      <LocationItem
         v-for="(location, index) in filteredList" :key="index"
         :location="location"
       />
@@ -19,10 +19,10 @@
   import { useWeatherStore } from '@/stores/WeatherStore'
   import { useConfiguration } from '@/stores/Configuration'
 
-  // Components
+  /* COMPONENTS */
   import LocationItem from '@/components/searchPage/LocationItem.vue'
 
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
   const Configuration = useConfiguration()
 
@@ -66,7 +66,7 @@
     margin-bottom: 30px;
   }
 
-  input {
+  #search {
     font-style: italic;
     font-weight: 500;
     font-size: var(--font-medium);
@@ -79,16 +79,28 @@
     background: var(--color-white-soft);
     padding: 10px 47px 10px 15px;
     outline: none;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     background-image: url(@/assets/svg/location-black.svg);
     background-repeat: no-repeat;
     background-position: right 15px center;
-    background-size: 11px;
+    background-size: 0.6875rem; // 11px
   }
+}
 
-  .results {
-    padding: 15px;
+/* ANIMATIONS */
+.results {
+  animation: dropIn 1s ease-out forwards;
+}
+
+@keyframes dropIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
   }
 }
 

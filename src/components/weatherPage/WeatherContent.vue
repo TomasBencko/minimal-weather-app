@@ -3,11 +3,13 @@
     <component class="tile"
       v-for="(tileConfig, index) in tilesConfiguration" :key="index"
       :is="componentList[tileConfig.type] || TileOther" :tileConfig="tileConfig"
+      :style="{ '--order': index }"
     />
 
     <TileForecast class="tile forecast"
       v-for="(itemData, index) in daysForecasted" :key="index"
       :forecastData="itemData"
+      :style="{ '--order': tilesConfiguration.length + index }"
     />
   </div>
 </template>
@@ -17,7 +19,7 @@
   import { useWeatherStore } from '@/stores/WeatherStore'
   import type { listOfComponents } from '@/common/types'
 
-  // Components
+  /* COMPONENTS */
   import TileWeather from '@/components/weatherPage/weatherTiles/TileWeather.vue'
   import TileTemperature from '@/components/weatherPage/weatherTiles/TileTemperature.vue'
   import TileHighAndLow from '@/components/weatherPage/weatherTiles/TileHighAndLow.vue'
@@ -31,7 +33,7 @@
   }
   
 
-  // Load configuration for tiles to be rendered
+  // Load configuration for tiles that will be rendered
   const Configuration = useConfiguration()
   const tilesConfiguration = Configuration.tilesConfiguration
 
@@ -53,13 +55,10 @@
   justify-content: space-around;
 
   .tile {
-    // border: 1px solid blue;
     flex: 33%;
     flex-shrink: 0;
-    // background: red;
     overflow: hidden;
     height: 95px;
-    
     @media (min-height: 900px) { height: 110px; }
     @media (min-height: 1000px) { height: 120px; }
     @media (min-height: 1100px) { height: 130px; }
@@ -76,6 +75,25 @@
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     margin: 0 5px;
+  }
+}
+
+/* ANIMATIONS */
+.tile {
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dropIn .5s ease-out forwards;
+  animation-delay: calc(var(--order) * 100ms)
+}
+
+@keyframes dropIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
   }
 }
 

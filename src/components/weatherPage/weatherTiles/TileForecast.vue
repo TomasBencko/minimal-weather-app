@@ -12,13 +12,13 @@
 <script setup lang="ts">
   import moment from 'moment'
 
-  // Components
+  /* COMPONENTS */
   import ForecastHigh from '@/assets/svg/forecast-high.svg'
   import ForecastLow from '@/assets/svg/forecast-low.svg'
   import WeatherIcon from '@/components/weatherPage/WeatherIcon.vue'
   
 
-  // Variables necessary to render the component
+  /* VARIABLES */
   const props = defineProps({ forecastData: { type: Object, required: true } })
 
   const weather: string = props.forecastData.weather
@@ -27,7 +27,7 @@
   const day: string = formatDay(props.forecastData.day)
   
 
-  // Functions to format raw values
+  /* HELPERS */
   function formatDay(value: number): string {
     return moment.utc(value * 1000).format('ddd, DD')
   }
@@ -39,8 +39,8 @@
 .TileForecast {
 
   .icon {
-    max-width: 24px;
-    max-height: 24px;
+    max-width: 1.5rem; // 24px
+    max-height: 1.5rem; // 24px
     margin-bottom: 10px;
   }
 
@@ -59,7 +59,7 @@
 
     .iconSmall {
       display: inline-block;
-      height: 7px;
+      height: 0.44rem; // 7px
       margin-left: 2px;
     }
   }

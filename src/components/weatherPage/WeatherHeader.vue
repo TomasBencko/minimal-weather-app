@@ -1,32 +1,32 @@
 <template>
   <div class="WeatherHeader">
     <div class="date">{{ date }}</div>
-    <div class="location">
-      <RouterLink to="/search">{{ locationName }}, {{ country }}</RouterLink>
+    <RouterLink to="/search" class="location">
+      <span>{{ locationName }}, {{ country }}</span>
       <LocationPin class="icon" />
-    </div>
+    </RouterLink>
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue'
   import moment from 'moment'
-  import type { dictionary } from '@/common/types'
+  import type { dictionary, location } from '@/common/types'
   import { useWeatherStore } from '@/stores/WeatherStore'
 
-  // Components
+  /* COMPONENTS */
   import { RouterLink } from 'vue-router'
   import LocationPin from '@/assets/svg/location.svg'
 
-  // Setup
+  /* SETUP */
   const WeatherStore = useWeatherStore()
 
 
-  // Variables necessary to render the component
-  const location:string = WeatherStore.locationSelected
-  const locationData = WeatherStore.weatherData[location].locationData
+  /* VARIABLES */
+  const locationSelected:string = WeatherStore.locationSelected
+  const locationData: location = WeatherStore.weatherData[locationSelected].locationData
   const locationName: string = locationData.location
-  const country = (() => {
+  const country: string = (() => {
     const countryCode: string = locationData.country
     const codeDictionary: dictionary = { SK: 'Slovakia', CZ: 'Czechia' }
     return codeDictionary[countryCode] || countryCode
@@ -45,16 +45,9 @@
 .WeatherHeader {
   display: flex;
   justify-content: space-between;
-  /* margin: -20px -20px 0; */
-
-  div {
-    padding: 15px;
-  }
+  width: 100%;
 
   .date {
-    /* flex-grow: 1;
-    text-align: center; */
-
     font-size: var(--font-small);
     line-height: 17px;
     text-align: center;
@@ -63,6 +56,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 15px;
     padding-right: 10px;
   }
 
@@ -71,23 +65,29 @@
     background: var(--color-blue-transparent);
     white-space: nowrap;
     padding-left: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 15px;
 
-    a {
+    span {
       font-weight: 500;
       font-size: var(--font-base);
       line-height: 19px;
       text-align: center;
       color: var(--color-blue);
-      
-      text-decoration: none;
     }
 
     .icon {
-      // display: inline-block;
       margin-left: 7px;
-      height: 12px;
+      height: 0.75rem;
+      bottom: -2px;
     }
   }
+
+  .location:hover {
+      background: var(--color-blue-transparent-2);
+    }
 }
 
 </style>

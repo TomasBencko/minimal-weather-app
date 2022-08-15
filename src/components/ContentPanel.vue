@@ -7,7 +7,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  // Components
+  /* COMPONENTS */
   import { RouterView } from 'vue-router'
 
 
@@ -30,11 +30,12 @@ $maxHeight: 900px;
   bottom: 0;
   width: 100%;
   min-height: calc(100% - (100vw * $bgAspectRation) + $borderRadius);
+  max-height: 100vh;
   
   background: #FFFFFF;
   box-shadow: 0px -16px 40px rgba(0, 0, 0, 0.2);
   border-radius: $borderRadius $borderRadius 0 0;
-  overflow: hidden;
+  overflow: auto;
 
   display: flex;
   flex-direction: column;

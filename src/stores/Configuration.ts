@@ -3,9 +3,6 @@ import { ref } from 'vue'
 
 export const useConfiguration = defineStore('configuration', () => {
 
-  // Bypass API calls and return placehodler data if true
-  const usePlaceholderData = ref<boolean>(false)
-
   // Set number of minutes for API data to be cached
   const minutesToExpire = ref<number>(20)
 
@@ -34,8 +31,7 @@ export const useConfiguration = defineStore('configuration', () => {
   ]
   
   return {
-    defaultUnits, defaultLocation,
-    tilesConfiguration, locationList,
-    usePlaceholderData, minutesToExpire
+    defaultUnits, defaultLocation, minutesToExpire,
+    locationList, tilesConfiguration
   }
 })

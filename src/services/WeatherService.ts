@@ -6,7 +6,7 @@ const apiKey = import.meta.env.VITE_WEATHER_KEY
 
 // Use placeholder data if set so in '.env.local', or if API key is not provided
 let usePlaceholderData: boolean = false
-if (!apiKey || import.meta.env.VITE_USE_PLACEHOLDER_DATA) {
+if (!apiKey || import.meta.env.VITE_USE_PLACEHOLDER_DATA === 'true') {
   usePlaceholderData = true
 
   // Log warning into console, if using placeholder data

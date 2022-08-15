@@ -3,13 +3,12 @@ import { ref } from 'vue'
 
 import WeatherService from '@/services/WeatherService'
 import { useConfiguration  } from '@/stores/Configuration'
-
 import type { weatherDataAll, location, current, forecast } from '@/common/types'
 
 
 export const useWeatherStore = defineStore('weatherStore', () => {
 
-  // Setup
+  /* SETUP */
   const Configuration = useConfiguration()
 
 
@@ -31,9 +30,6 @@ export const useWeatherStore = defineStore('weatherStore', () => {
 
     // ...otherwise, get new data from API
     try {
-
-      // For testing purposes only... delete later
-      // if (location === 'Koromľa') await new Promise(r => setTimeout(r, 2000))
 
       let locationData: location = {} as location
       let currentData: current = {} as current
@@ -116,6 +112,5 @@ export const useWeatherStore = defineStore('weatherStore', () => {
 
   
 
-  /* EXTRACTING DATA */
   return { weatherData, locationSelected, fetchWeatherAPIData }
 })

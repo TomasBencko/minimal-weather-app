@@ -4,10 +4,8 @@
 
 <script setup lang="ts">
 
-  // Components
+  /* COMPONENTS */
   import ContentPanel from "@/components/ContentPanel.vue"
-
-
 
 </script>
 
@@ -16,9 +14,11 @@
 $maxWidth: 520px;
 
 #app {
-  background-image: url(./assets/svg/bg-cover.svg);
+  background-color: #B9CBE5;
+  background-image: url(./assets/bg-cover.svg);
   background-position: top center;
   background-repeat: no-repeat;
+  overflow: hidden;
 
   background-size: contain;
 }
