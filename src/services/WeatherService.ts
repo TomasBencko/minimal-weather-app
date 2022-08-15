@@ -19,7 +19,7 @@ if (!apiKey || import.meta.env.VITE_USE_PLACEHOLDER_DATA === 'true') {
 
 // Create an axios instance for OpenWeather® API
 const openWeatherAPI = axios.create({
-  baseURL: 'http://api.openweathermap.org/',
+  baseURL: 'https://api.openweathermap.org/',
   timeout: 1000,
   headers: {
     'Accept': 'application/json',

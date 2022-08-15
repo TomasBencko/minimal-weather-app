@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref, computed, defineEmits } from 'vue'
+  import { onMounted, ref, computed } from 'vue'
   import { useWeatherStore } from '@/stores/WeatherStore'
   import { useConfiguration } from '@/stores/Configuration'
 
